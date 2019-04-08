@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {View,Text,TouchableOpacity,Image
-    ,ScrollView,StyleSheet,ActivityIndicator} from 'react-native'
+    ,ScrollView,StyleSheet,ActivityIndicator,RefreshControl} from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
 import { SafeAreaView } from 'react-navigation';
@@ -13,6 +13,8 @@ class  Manage extends Component{
     constructor(props){
         super(props)
         this.state={
+            show:true,
+            onRefresh:false,
             visible:false,
             in:0,
             dizhi:[
@@ -104,7 +106,37 @@ class  Manage extends Component{
         
     }
   
+  componentWillMount(){
+    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    .then(res=>res.json())
+    .then(res=>{
+       this.setState({show:false}) 
+    }
+
+    ).catch(err=>{
+        
+    })       
+  }
+  onRefresh=()=>{
+      console.log('6666')
+      this.setState({onRefresh:true})
+      fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3').then(res=>res.json()).then(res=>{
+          this.setState({onRefresh:false})
+      }
+
+      ).catch(err=>{
+          
+      })
+  }
+    
     render(){
+        if(this.state.show){
+            return(
+                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
+                  </View>
+            )
+        }
         return(
             <SafeAreaView style={[qj.w*.95,{alignItems:'center',flex:1}]}>
               {/* title */}
@@ -117,6 +149,7 @@ class  Manage extends Component{
                   
                   <TouchableOpacity style={ys.xzk} onPress={()=>{
                       this.setState({visible:true})
+
                   }}>
                    <Text style={{width:'85%',fontSize:18,color:qj.themeColor,}}>{
                        this.state.dizhi[this.state.in].name
@@ -126,14 +159,17 @@ class  Manage extends Component{
               </View>
 
 {/* list ----! */}
-         <ScrollView  showsVerticalScrollIndicator={false}>
+         <ScrollView  showsVerticalScrollIndicator={false} refreshControl={
+         <RefreshControl onRefresh={this.onRefresh} refreshing={this.state.onRefresh}/>
+         }
+         >
           {
               this.state.list.map((item,index)=>{         
                return(
                 <View style={{
                     width:qj.w*.95,
                     marginTop:10,
-                    }}>
+                    }} key={index}>
                  <View style={ys.list_title}>
                     <View style={ys.title_left}></View>
                     <Text style={{fontSize:18,color:qj.themeColor,marginLeft:8}}>{item.title}</Text>
@@ -144,7 +180,7 @@ class  Manage extends Component{
                       return(
                         <TouchableOpacity style={ys.listxq} onPress={()=>{
                             this.props.navigation.navigate(item.tiao)
-                        }}>
+                        }} key={index}>
                         <Text style={{fontSize:18,color:qj.themehui2}}>{item.xq}</Text>
                         <Ionicons name={'ios-arrow-forward'} size={20} color={qj.themehui}/>
                         </TouchableOpacity>
@@ -171,11 +207,13 @@ class  Manage extends Component{
               {
                   this.state.dizhi.map((item,index)=>{
                    return (
-                       <TouchableOpacity onPress={()=>{
+                       <TouchableOpacity key={index} onPress={()=>{
+
                           this.setState({
                               visible:false,
                               in:index
                             })
+                        this.onRefresh()
                        }} style={ys.dizhi}>
                        <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                        </TouchableOpacity>

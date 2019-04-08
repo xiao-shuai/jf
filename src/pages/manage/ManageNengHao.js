@@ -13,6 +13,7 @@ class ManageNengHao extends Component {
     constructor(props){
         super(props)
         this.state={
+            show:true,
             visible:false,
             in:0,
             dizhi:[
@@ -59,8 +60,26 @@ class ManageNengHao extends Component {
        
     }
 
-    render(){
+    componentWillMount(){
+    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    .then(res=>res.json())
+    .then(res=>{
+       this.setState({show:false}) 
+    }
 
+    ).catch(err=>{
+        
+    }) 
+    }
+
+    render(){
+        if(this.state.show){
+            return(
+               <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+               <ActivityIndicator  size={'large'} color={qj.themeColor}/>
+               </View>
+            )
+           }
 const colors = ['#5793f3', '#d14a61', '#675bba'];
 
      const   option = {
@@ -234,7 +253,7 @@ const colors = ['#5793f3', '#d14a61', '#675bba'];
 
                   <ScrollView>
                       <ImageBackground source={require('../../img/nhbj.png')} style={{width:qj.w,height:qj.h*.3,marginTop:5}}>
-                         <Text style={{fontSize:25,color:'white',marginLeft:'6%',marginTop:10}}>XXXXX园区</Text>
+                         <Text style={{fontSize:25,color:'white',marginLeft:'6%',marginTop:10}}>Jinyanlong building park</Text>
                          <Text style={{fontSize:18,color:'white',marginLeft:'6%',marginTop:10}}>Total floor area:2000㎡</Text>
                          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginTop:qj.h*.09,padding:10}}>
                              <View style={{alignItems:'center',}}>

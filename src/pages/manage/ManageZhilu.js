@@ -13,6 +13,7 @@ class ManageZhilu extends Component {
     constructor(props){
         super(props)
         this.state={
+            show:true,
             visible:false,
             in:0,
             dizhi:[
@@ -600,8 +601,25 @@ this.biaoge=[
        }         
 ]
     }
+componentWillMount(){
+    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    .then(res=>res.json())
+    .then(res=>{
+       this.setState({show:false}) 
+    }
 
+    ).catch(err=>{
+        
+    }) 
+}
     render(){
+        if(this.state.show){
+            return(
+               <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+               <ActivityIndicator  size={'large'} color={qj.themeColor}/>
+               </View>
+            )
+           }
         return(
             <SafeAreaView style={{flex:1}}>
              <View style={{width:'100%',alignItems:'center'}}>

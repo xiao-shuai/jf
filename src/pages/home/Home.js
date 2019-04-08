@@ -1,6 +1,13 @@
 import React,{Component} from 'react'
-import {View,Text,TouchableOpacity,Image
-    ,ScrollView,StyleSheet,ActivityIndicator} from 'react-native'
+import {View,
+    Text,
+    TouchableOpacity,
+    Image,
+    ScrollView,
+    StyleSheet,
+    ActivityIndicator,
+    RefreshControl,
+} from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
 import { SafeAreaView } from 'react-navigation';
@@ -21,6 +28,7 @@ class  Home extends Component{
     constructor(props){
         super(props)
         this.state={
+        refresh:false,
         loading:true,
         threetab:[],
         fourtab:[]
@@ -91,6 +99,25 @@ componentWillMount(){
     })
 }
 
+onRefresh=()=>{
+    this.setState({refresh:true})
+    let userdata=Parse.Object.extend('home')
+  let user = new Parse.Query(userdata)
+    user.find().then(res=>{
+        console.log('res---!',res)
+    
+        this.setState({
+            threetab:res[0].attributes.hometab3,
+            fourtab:res[0].attributes.hometab4,
+            loading:false,
+            refresh:false
+        })
+    }
+
+    ).catch(err=>{
+        console.log('err--!',err)
+    })
+}
     render(){
         if(this.state.loading){
             return (
@@ -116,7 +143,7 @@ componentWillMount(){
         },
         series : [
             {
-                name: '访问来源',
+                name: 'Total energy consumption',
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
@@ -145,7 +172,7 @@ componentWillMount(){
             trigger: 'axis'
         },
         legend: {
-            data:['邮件营销','联盟广告'],
+            data:['Today,','Yesterday,'],
             right:10
         },
         grid: {
@@ -162,20 +189,20 @@ componentWillMount(){
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['周一','周二','周三','周四','周五','周六','周日']
+            data: ['06:00','07:00','08:00','09:00','10:00','11:00','12:00']
         },
         yAxis: {
             type: 'value'
         },
         series: [
             {
-                name:'邮件营销',
+                name:'Today',
                 type:'line',
                 stack: '总量',
                 data:[120, 132, 101, 134, 90, 230, 210]
             },
             {
-                name:'联盟广告',
+                name:'Yesterday',
                 type:'line',
                 stack: '总量',
                 data:[220, 182, 191, 234, 290, 330, 310]
@@ -186,7 +213,9 @@ componentWillMount(){
     
         return(
             <SafeAreaView style={{flex:1}}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} refreshControl={
+            <RefreshControl refreshing={this.state.refresh} onRefresh={this.onRefresh}/>
+            }>
            
               <MapView  
               style={styles.map}

@@ -1,6 +1,9 @@
 import React,{Component} from 'react'
 import {View,Text,TouchableOpacity,Image
-    ,ScrollView,StyleSheet,ActivityIndicator} from 'react-native'
+    ,ScrollView,StyleSheet,
+    ActivityIndicator,
+     RefreshControl 
+} from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
 import { SafeAreaView } from 'react-navigation';
@@ -12,6 +15,7 @@ class ManageAnalyze extends Component {
     constructor(props){
         super(props)
         this.state={
+            show:true,
             visible:false,
             in:0,
             dizhi:[
@@ -46,7 +50,7 @@ class ManageAnalyze extends Component {
             xAxis : [
                 {
                     type : 'category',
-                    data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                    data : ['06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00']
                 }
             ],
             yAxis : [
@@ -174,7 +178,26 @@ class ManageAnalyze extends Component {
         };
     }
 
+componentWillMount(){
+    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    .then(res=>res.json())
+    .then(res=>{
+       this.setState({show:false}) 
+    }
+
+    ).catch(err=>{
+        
+    })    
+}
+
     render(){
+        if(this.state.show){
+            return(
+                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
+                </View>
+            )
+        }
         return(
             <SafeAreaView style={{flex:1}}>
          <View style={{width:'100%',alignItems:'center'}}>

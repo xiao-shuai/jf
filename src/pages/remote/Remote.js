@@ -21,6 +21,8 @@ class  Remote extends Component{
     constructor(props){
         super(props)
         this.state={
+            isloading:true,
+            onRefresh:false,
             visible:false,
             in:0,
             issw:false,
@@ -51,8 +53,39 @@ class  Remote extends Component{
         }
 
     }
-  
+   
+    onRefresh=()=>{
+     this.setState({onRefresh:true})
+    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    .then(res=>res.json())
+    .then(res=>{
+       this.setState({onRefresh:false}) 
+    }
+
+    ).catch(err=>{
+        
+    })   
+    }
+
+  componentWillMount(){
+    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    .then(res=>res.json())
+    .then(res=>{
+       this.setState({isloading:false}) 
+    }
+
+    ).catch(err=>{
+        
+    })    
+  }  
     render(){
+        if(this.state.isloading){
+            return(
+                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
+                 </View>
+            )
+        }
         return(
             <SafeAreaView style={{flex:1}}>
  {/* title */}
@@ -78,7 +111,9 @@ class  Remote extends Component{
      </View>
 
    {/* list */}
-   <ScrollView contentContainerStyle={{alignItems:'center'}}>
+   <ScrollView contentContainerStyle={{alignItems:'center'}} refreshControl={
+       <RefreshControl refreshing={this.state.onRefresh} onRefresh={this.onRefresh}/>
+   }>
    <View style={ys.list_title}>
     <Text style={{fontSize:18,color:qj.themehui2}}>The device name</Text>
     <Switch 
@@ -131,6 +166,7 @@ alignItems:'center'
                               visible:false,
                               in:index
                             })
+                            this.onRefresh()
                        }} style={ys.dizhi}>
                        <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                        </TouchableOpacity>
