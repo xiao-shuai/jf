@@ -35,8 +35,8 @@ class  Home extends Component{
         }
         this.log=[
             {
-                latitude: 37.78825,
-                longitude: -122.4324,
+                latitude: 37.77725,
+                longitude: -122.4724,
                 title:'Building A',
 
                 title2:'Daily',
@@ -50,8 +50,8 @@ class  Home extends Component{
                 title5_num:'11333kw',
             },
             {
-                latitude: 37.78825,
-                longitude: -122.4,
+                latitude: 37.77985,
+                longitude: -122.44,
                 title:'Building B',
 
                 title2:'Daily',

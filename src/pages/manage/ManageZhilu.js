@@ -18,15 +18,15 @@ class ManageZhilu extends Component {
             in:0,
             dizhi:[
                 {
-                name:'AAAAAAA2',
-    
-                },
-                {
-                name:'BBBBBB',
-                },
-                {
-                name:'CCCCCCC',
-                }
+                    name:'Jinfeng technology building',
+        
+                    },
+                    {
+                    name:'Golden dragon technology building',
+                    },
+                    {
+                    name:'Jianwai technology building',
+                    }
             ],
         }
         this.six=[

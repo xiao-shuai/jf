@@ -19,14 +19,14 @@ class  Manage extends Component{
             in:0,
             dizhi:[
                 {
-                name:'AAAAAAA2',
+                name:'Jinfeng technology building',
     
                 },
                 {
-                name:'BBBBBB',
+                name:'Golden dragon technology building',
                 },
                 {
-                name:'CCCCCCC',
+                name:'Jianwai technology building',
                 }
             ],
 

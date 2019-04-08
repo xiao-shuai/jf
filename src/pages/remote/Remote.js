@@ -28,15 +28,15 @@ class  Remote extends Component{
             issw:false,
             dizhi:[
                 {
-                name:'AAAAAAA2',
-    
-                },
-                {
-                name:'BBBBBB',
-                },
-                {
-                name:'CCCCCCC',
-                }
+                    name:'Jinfeng technology building',
+        
+                    },
+                    {
+                    name:'Golden dragon technology building',
+                    },
+                    {
+                    name:'Jianwai technology building',
+                    }
             ],
           sb:[
               {
