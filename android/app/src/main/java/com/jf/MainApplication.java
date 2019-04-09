@@ -3,6 +3,7 @@ package com.jf;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnta.clear.ClearCachePackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ClearCachePackage(),
             new RNI18nPackage(),
             new MapsPackage(),
             new LinearGradientPackage(),

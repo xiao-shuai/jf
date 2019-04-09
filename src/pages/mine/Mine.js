@@ -13,16 +13,26 @@ import LinearGradient from 'react-native-linear-gradient';
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Toast, {DURATION} from 'react-native-easy-toast'
+import clear from 'react-native-clear-app-cache'
 class  Mine extends Component{
 
     constructor(props){
         super(props)
         this.state={
-           isloading:true
+           isloading:true,
+           cacheSize:"",
+           unit:"",
+
         }
+        clear.getAppCacheSize((value,unit)=>{
+            this.setState({
+                cacheSize:value, //缓存大小
+                unit:unit  //缓存单位
+            })
+        });
         this.option=[
             {
-             title:'Version update',
+             title:'Clear cache',
              tiao:'',
             },
             {
@@ -36,6 +46,19 @@ class  Mine extends Component{
         ]
 
     }
+
+    handlerClearAppCache = () => {
+        clear.clearAppCache(() => {
+            this.refs.toast.show('Clean up the success!',1000)
+            console.log("清除成功");
+            clear.getAppCacheSize((value, unit) => {
+                this.setState({
+                    cacheSize: value, //缓存大小
+                    unit: unit  //缓存单位
+                })
+            });
+        });
+    };
 
  componentWillMount(){
     fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
@@ -62,9 +85,9 @@ class  Mine extends Component{
         }
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
-              <LinearGradient colors={['#74ebd5', '#ACB6E5']} style={{width:qj.w,height:qj.h*.15,
+              <LinearGradient colors={['#74ebd5', '#ACB6E5']} style={{width:qj.w,height:qj.h*.2,
                 alignItems:'center',justifyContent:'center'}}>
-              <Text style={{fontSize:18,color:qj.themebai,fontWeight:'600'}}>Energy Internet big data platform</Text>
+              <Text style={{fontSize:20,color:qj.themebai,fontWeight:'600'}}>Energy Internet big data platform</Text>
               <Text style={{marginTop:8,color:'white'}}>----- Logged account -----</Text>
               </LinearGradient>
               {/* under */}
@@ -84,13 +107,20 @@ class  Mine extends Component{
                           alignItems:'center',
                         }} onPress={()=>{ 
                             if(index==0){
-                                this.refs.toast.show('This is the latest version!',1000)
+                            
+                                this.handlerClearAppCache()
                             }else{
                                 this.props.navigation.navigate(item.tiao)
                             }
                         }}>
-                          <Text style={{fontSize:20,color:'white'}}>{item.title}</Text>
-                          <Ionicons name={'ios-arrow-forward'} size={25} color={qj.themehui2}/>
+                          <Text style={{fontSize:20,color:'white',fontWeight:'600'}}>{item.title}</Text>
+                          {
+                              index==0?
+                              <Text style={{color:'white',fontSize:20}}>{this.state.cacheSize} {this.state.unit}</Text>
+                              :
+                              <Ionicons name={'ios-arrow-forward'} size={25} color={qj.themehui2}/>
+                          }
+
                       </TouchableOpacity>
                       
                        )
@@ -98,12 +128,14 @@ class  Mine extends Component{
                   }
               </View>
               {/* btn */}
-              <TouchableOpacity style={ys.btn} 
+              <LinearGradient colors={['#ACB6E5','#74ebd5']} style={ys.btn} >
+              <TouchableOpacity 
               onPress={()=>{
                 this.logout()
               }}>
                 <Text style={{fontSize:20,fontWeight:'600',color:'white'}}>Log out</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>  
+              </LinearGradient>
                <Toast
 
 ref="toast"
@@ -121,10 +153,10 @@ opacity={0.8}
 const ys=StyleSheet.create({
   btn:{
     width:qj.w,
-    backgroundColor:qj.themehui,
+    backgroundColor:qj.themeColor,
     height:qj.h*.07,
     marginTop:20,
-    borderRadius:8,
+    // borderRadius:8,
     alignItems:'center',
     justifyContent:'center'
   }

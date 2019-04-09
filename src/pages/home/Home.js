@@ -168,7 +168,9 @@ onRefresh=()=>{
                    
                 ],
                 itemStyle: {
+                    // color:['#87CEFA','#20B2AA','#48D1CC','#AFEEEE'],
                     emphasis: {
+                        // color:['#87CEFA','#20B2AA','#48D1CC','#AFEEEE'],
                         shadowBlur: 10,
                         shadowOffsetX: 0,
                         shadowColor: 'rgba(0, 0, 0, 0.5)'

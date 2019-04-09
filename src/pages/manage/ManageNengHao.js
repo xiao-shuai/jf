@@ -80,7 +80,7 @@ class ManageNengHao extends Component {
                </View>
             )
            }
-const colors = ['#5793f3', '#d14a61', '#675bba'];
+const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
 
      const   option = {
             backgroundColor: '#2c343c',    
@@ -108,16 +108,16 @@ const colors = ['#5793f3', '#d14a61', '#675bba'];
             },
             series : [
                 {
-                    name:'访问来源',
+                    name:'energy',
                     type:'pie',
                     radius : '55%',
                     center: ['50%', '50%'],
                     data:[
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:274, name:'联盟广告'},
-                        {value:235, name:'视频广告'},
-                        {value:400, name:'搜索引擎'}
+                        {value:335, name:'Air'},
+                        {value:310, name:'Socket'},
+                        {value:274, name:'Power'},
+                        // {value:235, name:'视频广告'},
+                        // {value:400, name:'搜索引擎'}
                     ].sort(function (a, b) { return a.value - b.value; }),
                     roseType: 'radius',
                     label: {
@@ -139,7 +139,7 @@ const colors = ['#5793f3', '#d14a61', '#675bba'];
                     },
                     itemStyle: {
                         normal: {
-                            color: '#c23531',
+                            color: '#87CEFA',
                             shadowBlur: 200,
                             shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
@@ -252,7 +252,7 @@ const colors = ['#5793f3', '#d14a61', '#675bba'];
                   </View>
 
                   <ScrollView>
-                      <ImageBackground source={require('../../img/nhbj.png')} style={{width:qj.w,height:qj.h*.3,marginTop:5}}>
+                      <ImageBackground source={require('../../img/nhbj.png')} style={{width:qj.w,height:qj.h*.3,marginTop:10}}>
                          <Text style={{fontSize:25,color:'white',marginLeft:'6%',marginTop:10}}>Jinyanlong building park</Text>
                          <Text style={{fontSize:18,color:'white',marginLeft:'6%',marginTop:10}}>Total floor area:2000㎡</Text>
                          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginTop:qj.h*.09,padding:10}}>
