@@ -311,7 +311,10 @@ const colors = ['#5793f3', '#d14a61', '#675bba'];
       <View style={{marginTop:18}}>
        <Echarts option={option2} height={300} />
        </View>
-      
+                {/* btm */}
+                <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
                   </ScrollView>
                
     

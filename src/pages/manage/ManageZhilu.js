@@ -31,28 +31,80 @@ class ManageZhilu extends Component {
         }
         this.six=[
             {
-                title:'Today',
+                title:'MAX',
                 num:'2345.66',
                 dw:'kwh',
                 zt:'Yesterday,'
             },
             {
-                title:'Cumulative',
+                title:'MIN',
                 num:'2345.66',
                 dw:'kwh',
                 zt:'Yesterday,'
             },
             {
-                title:'Total year',
+                title:'Average',
                 num:'2345.66',
                 dw:'kwh',
-                zt:'Yesterday,'
+                zt:'Yesterday'
             },
             {
-                title:'Cost',
+                title:'Divide',
                 num:'2345.66',
                 dw:'Dollar',
                 zt:'Yesterday,'
+            },
+        ] 
+        this.six2=[
+            {
+                title:'MAX',
+                num:'2345.66',
+                dw:'kwh',
+                zt:'3%'
+            },
+            {
+                title:'MIN',
+                num:'2345.66',
+                dw:'kwh',
+                zt:'9%'
+            },
+            {
+                title:'Average',
+                num:'2345.66',
+                dw:'kwh',
+                zt:'-8%'
+            },
+            {
+                title:'Divide',
+                num:'2345.66',
+                dw:'Dollar',
+                zt:'-10%'
+            },
+        ] 
+        this.six3=[
+            {
+                title:'The total energy',
+                num:'2345.66',
+                dw:'💲',
+                zt:'5%'
+            },
+            {
+                title:'Cost Electricity',
+                num:'2345.66',
+                dw:'💲',
+                zt:'9%'
+            },
+            {
+                title:'Cost water',
+                num:'2345.66',
+                dw:'💲',
+                zt:'-8%'
+            },
+            {
+                title:'Divide',
+                num:'2345.66',
+                dw:'💲',
+                zt:'-10%'
             },
         ] 
        this.option1={
@@ -634,7 +686,11 @@ componentWillMount(){
             </View>
 
             {/* tab */}
-            <ScrollableTabView>
+            <ScrollableTabView 
+            tabBarActiveTextColor={qj.themeColor} 
+            tabBarUnderlineStyle={{backgroundColor:qj.themeColor}}
+             
+            >
                 <ScrollView tabLabel="General">
                     <View style={ys.tabtitle}>
                         <Text>Day load accumulation</Text>
@@ -645,7 +701,7 @@ componentWillMount(){
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
               <View style={{flexDirection:'row'}}>
-                  <Ionicons name={'ios-globe'} size={26} color={qj.themeColor}/>
+                  {/* <Ionicons name={'ios-globe'} size={26} color={qj.themeColor}/> */}
                   <Text style={{fontSize:22,marginLeft:5,color:qj.themeColor}}>{item.title}</Text>
               </View>
 
@@ -670,15 +726,16 @@ componentWillMount(){
                 {/* end  */}
                 <ScrollView tabLabel="Itemized">
                 <View style={ys.tabtitle}>
-                        <Text>Day load accumulation</Text>
+                        <Text>Monthly cumulative analysis</Text>
                     </View>
      <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
            {
-               this.six.map((item,index)=>{
+               this.six2.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
-              <View style={{flexDirection:'row'}}>
-                  <Ionicons name={'ios-globe'} size={26} color={qj.themeColor}/>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+                  {/* <Ionicons name={'ios-globe'} size={26} color={qj.themeColor}/> */}
+                  <Text style={{color:'white'}}>Seq:{item.zt}</Text>
                   <Text style={{fontSize:22,marginLeft:5,color:qj.themeColor}}>{item.title}</Text>
               </View>
 
@@ -700,17 +757,18 @@ componentWillMount(){
                 {/* 2end */}
                 <ScrollView tabLabel="Energy">
                 <View style={ys.tabtitle}>
-                        <Text>Day load accumulation</Text>
+                        <Text>Energy consumption statistics</Text>
                     </View>
       <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
            {
-               this.six.map((item,index)=>{
+               this.six3.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
-              <View style={{flexDirection:'row'}}>
-                  <Ionicons name={'ios-globe'} size={26} color={qj.themeColor}/>
+              
+                  {/* <Ionicons name={'ios-globe'} size={26} color={qj.themeColor}/> */}
+                  <Text style={{color:'white'}}>Seq:{item.zt}</Text>
                   <Text style={{fontSize:22,marginLeft:5,color:qj.themeColor}}>{item.title}</Text>
-              </View>
+              
 
               <View style={{flexDirection:'row',alignItems:'center',marginTop:5}}>
               <Text style={{fontSize:20,color:qj.themehui2}}>{item.num}</Text>
@@ -730,7 +788,7 @@ componentWillMount(){
                 {/* 3 end  */}
                 <ScrollView tabLabel="Analysis">
                 <View style={ys.tabtitle}>
-                        <Text>Day load accumulation</Text>
+                        <Text>The most energy</Text>
                 </View>
 
           <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>

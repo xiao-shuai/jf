@@ -190,7 +190,10 @@ class ManageHarmonic extends Component {
     <View style={{marginTop:20}}>
 <Echarts option={this.option2} height={300}/>
 </View>
-
+{/* btm */}
+       <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
      </ScrollView>
         {/* tan kaung xz */}
         <Overlay visible={this.state.visible} onBackdropPress={()=>{

@@ -152,6 +152,10 @@ componentWillMount(){
                     <Rows data={options.tableData} textStyle={ys.text}/>
              </Table>
         </View>
+        {/* btm */}
+       <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
      </ScrollView>
 
           <Overlay visible={this.state.visible} onBackdropPress={()=>{

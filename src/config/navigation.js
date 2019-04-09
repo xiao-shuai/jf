@@ -8,7 +8,8 @@ import {Home,Mine,Remote,Manage,
   HomeDetail,ManagePic,ManageData,
   ManageFan,ManageNengHao,ManageAnalyze,
   ManageZhilu,ManagePower,ManageHarmonic,
-  ManageParameter,ManageMonitor
+  ManageParameter,ManageMonitor,About,FeedBack,
+  Login
 
 } from  '../pages/all';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -17,6 +18,7 @@ import {qj} from './style'
 const BottomTab=createBottomTabNavigator(
     {
       home:Home,
+      // login:Login,
       manage:Manage,
       remote:Remote,
       mine:Mine
@@ -54,6 +56,10 @@ const AllStack=createStackNavigator({
             headerBackTitle:null,
         })
      },
+     Home:{
+      screen:Home,
+      
+   },
      HomeDetail:{
         screen:HomeDetail,
         navigationOptions:()=>({
@@ -120,6 +126,26 @@ ManageMonitor:{
   navigationOptions:()=>({
       title:'Equipment monitoring'
   })
+},
+About:{
+  screen:About,
+  navigationOptions:()=>({
+      title:'About'
+  })
+},
+FeedBack:{
+  screen:FeedBack,
+  navigationOptions:()=>({
+      title:'FeedBack'
+  })
+},
+Login:{
+  screen:Login,
+  navigationOptions:()=>({
+    // title:'FeedBack'
+    header:null
+
+})
 },
 
 })

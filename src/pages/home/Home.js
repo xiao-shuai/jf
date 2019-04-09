@@ -3,6 +3,7 @@ import {View,
     Text,
     TouchableOpacity,
     Image,
+    AsyncStorage,
     ScrollView,
     StyleSheet,
     ActivityIndicator,
@@ -38,12 +39,10 @@ class  Home extends Component{
                 latitude: 37.77725,
                 longitude: -122.4724,
                 title:'Building A',
-
                 title2:'Daily',
                 title3:'Month',
                 title4:'Years',
                 title5:'Total',
-
                 title2_num:'1000kw',
                 title3_num:'2100kw',
                 title4_num:'7900kw',
@@ -97,6 +96,20 @@ componentWillMount(){
     ).catch(err=>{
         console.log('err--!',err)
     })
+    this.islogin()
+}
+
+islogin=()=>{
+ AsyncStorage.getItem('log').then(res=>{
+    console.log('login--!',res)
+    if(res==null){
+     this.props.navigation.navigate('Login')
+    }
+
+ }).catch(err=>{
+  
+    console.log('errr--!',err)
+ })
 }
 
 onRefresh=()=>{

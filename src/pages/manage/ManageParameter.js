@@ -29,6 +29,52 @@ class ManageParameter extends Component {
                     }
             ],
         }
+        this.data=[
+            {
+              title:'Electric meter 01',
+              bianhao:'001',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-1-4',
+              factory:'Mobile computer room'  
+            },
+            {
+                title:'Electric meter 02',
+                bianhao:'002',
+                xh:'CL48-AI',
+                dengji:'2.0',
+                dianya:'220',
+                dianliu:'40',
+                hz:'50',
+                date:'2019-1-18',
+                factory:'Mobile computer room'  
+              },
+              {
+                title:'Electric meter 03',
+                bianhao:'003',
+                xh:'CL48-AI',
+                dengji:'2.0',
+                dianya:'220',
+                dianliu:'40',
+                hz:'50',
+                date:'2019-4-9',
+                factory:''  
+              },
+              {
+                title:'Electric meter 04',
+                bianhao:'001',
+                xh:'CL48-AI',
+                dengji:'2.0',
+                dianya:'220',
+                dianliu:'40',
+                hz:'50',
+                date:'2019-2-9',
+                factory:''  
+              },
+        ]
     }
   componentWillMount(){
     fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
@@ -61,21 +107,33 @@ class ManageParameter extends Component {
                       <Ionicons name={'ios-arrow-down'} size={25} color={qj.themehui2}/>
                       </TouchableOpacity>
      </View>
-        <ScrollView style={{width:qj.w*.95}}>
-          <View style={styles.title}>
-              <Text style={{color:qj.themeColor,fontSize:18}}>Electric meter name</Text>
+        <ScrollView style={{width:qj.w*.95}} showsVerticalScrollIndicator={false}>
+        {
+            this.data.map((item,index)=>{
+         return(
+           <View>
+       <View style={styles.title}>
+              <Text style={{color:qj.themeColor,fontSize:18}}>{item.title}</Text>
           </View>
           <View style={{padding:10}}>
-              <Text style={styles.title_item}>Number: 001   Model:CL48-AI</Text>
-              <Text style={styles.title_item}>Accurate level: 001</Text>
+              <Text style={styles.title_item}>Number: {item.bianhao}   Model:{item.xh}</Text>
+              <Text style={styles.title_item}>Accurate level: {item.dengji}</Text>
               <Divider style={styles.title_item}/>
-              <Text style={styles.title_item}>Voltage (V): 001   Current (A) :</Text>
-              <Text style={styles.title_item}>Frequency (Hz) : 001</Text>
+              <Text style={styles.title_item}>Voltage (V): {item.dianliu}   Current (A) :{item.dianya}</Text>
+              <Text style={styles.title_item}>Frequency (Hz) : {item.hz}</Text>
               <Divider style={styles.title_item}/>
-              <Text style={styles.title_item}>The Manufacturer: 001</Text>
-              <Text style={styles.title_item}>The date of production: 001</Text>
+              <Text style={styles.title_item}>The Manufacturer: {item.factory}</Text>
+              <Text style={styles.title_item}>The date of production: {item.date}</Text>
             
           </View>
+           </View>
+         )
+            })
+        }
+          {/* btm */}
+       <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
         </ScrollView>
         <Overlay visible={this.state.visible} onBackdropPress={()=>{
                  this.setState({visible:false})

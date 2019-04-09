@@ -2,7 +2,8 @@ import React,{Component} from 'react'
 import {View,Text,TouchableOpacity,Image
     ,ScrollView,StyleSheet,
     ActivityIndicator,
-    RefreshControl
+    RefreshControl,
+    AsyncStorage
 } from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
@@ -11,7 +12,7 @@ import { Divider,Overlay } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient';
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import Toast, {DURATION} from 'react-native-easy-toast'
 class  Mine extends Component{
 
     constructor(props){
@@ -21,13 +22,16 @@ class  Mine extends Component{
         }
         this.option=[
             {
-             title:'Version update'
+             title:'Version update',
+             tiao:'',
             },
             {
-             title:'About us'
+             title:'About us',
+             tiao:'About',
             },
             {
-             title:'Feedback'
+             title:'Feedback',
+             tiao:'FeedBack',
             }
         ]
 
@@ -44,7 +48,10 @@ class  Mine extends Component{
         
     })   
  }
-    
+   logout=()=>{
+       AsyncStorage.removeItem('log')
+       this.props.navigation.navigate('Login')
+   } 
     render(){
         if(this.state.isloading){
             return(
@@ -55,14 +62,14 @@ class  Mine extends Component{
         }
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
-              <LinearGradient colors={['#74ebd5', '#ACB6E5']} style={{width:qj.w,height:qj.h*.1,
+              <LinearGradient colors={['#74ebd5', '#ACB6E5']} style={{width:qj.w,height:qj.h*.15,
                 alignItems:'center',justifyContent:'center'}}>
               <Text style={{fontSize:18,color:qj.themebai,fontWeight:'600'}}>Energy Internet big data platform</Text>
               <Text style={{marginTop:8,color:'white'}}>----- Logged account -----</Text>
               </LinearGradient>
               {/* under */}
             
-              <View style={{width:qj.w*.95,marginTop:10,}}>
+              <View style={{width:qj.w,marginTop:10}}>
                   {
                       this.option.map((item,index)=>{
                        return(
@@ -73,10 +80,15 @@ class  Mine extends Component{
                           marginTop:10,
                           justifyContent:'space-between',
                           height:qj.h*.06,
-                          borderRadius:8,
-                          alignItems:'center',padding:15
-                        
-                      }}>
+                          padding:10,
+                          alignItems:'center',
+                        }} onPress={()=>{ 
+                            if(index==0){
+                                this.refs.toast.show('This is the latest version!',1000)
+                            }else{
+                                this.props.navigation.navigate(item.tiao)
+                            }
+                        }}>
                           <Text style={{fontSize:20,color:'white'}}>{item.title}</Text>
                           <Ionicons name={'ios-arrow-forward'} size={25} color={qj.themehui2}/>
                       </TouchableOpacity>
@@ -86,26 +98,36 @@ class  Mine extends Component{
                   }
               </View>
               {/* btn */}
-              <TouchableOpacity style={{width:qj.w*.95,
-              backgroundColor:qj.themehui,height:qj.h*.07,
-              marginTop:20,
-              borderRadius:8,
-              alignItems:'center',
-              justifyContent:'center'
-            }} 
+              <TouchableOpacity style={ys.btn} 
               onPress={()=>{
-
+                this.logout()
               }}>
                 <Text style={{fontSize:20,fontWeight:'600',color:'white'}}>Log out</Text>
               </TouchableOpacity>
+               <Toast
 
+ref="toast"
+
+position='top'
+
+opacity={0.8}
+
+/>
             </SafeAreaView>
         )
     }
 
 }
 const ys=StyleSheet.create({
-
+  btn:{
+    width:qj.w,
+    backgroundColor:qj.themehui,
+    height:qj.h*.07,
+    marginTop:20,
+    borderRadius:8,
+    alignItems:'center',
+    justifyContent:'center'
+  }
 })
 export default Mine
 

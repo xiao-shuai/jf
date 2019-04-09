@@ -7,7 +7,7 @@ import {View,Text,TouchableOpacity,Image
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
 import { SafeAreaView } from 'react-navigation';
-import { Divider,Overlay } from 'react-native-elements'
+import { Divider,Overlay,CheckBox } from 'react-native-elements'
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Echarts from 'native-echarts';
@@ -225,7 +225,10 @@ componentWillMount(){
         <View style={{marginTop:10}}>
           <Echarts height={300} option={this.option2}/>
         </View>
-
+          {/* btm */}
+          <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
       </ScrollView>
 
              {/* tan kaung xz */}

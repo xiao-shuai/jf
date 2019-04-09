@@ -13,6 +13,9 @@ import ManagePower from '../pages/manage/ManagePower'
 import ManageHarmonic from '../pages/manage/ManageHarmonic'
 import  ManageParameter  from  '../pages/manage/ManageParameter'
 import ManageMonitor from '../pages/manage/ManageMonitor'
+import About from  '../pages/mine/About'
+import FeedBack from  './mine/FeedBack'
+import Login from './Login'
 export {
     Home,
     Manage,
@@ -28,5 +31,8 @@ export {
     ManagePower,
     ManageHarmonic,
     ManageParameter,
-    ManageMonitor
+    ManageMonitor,
+    About,
+    FeedBack,
+    Login
 }

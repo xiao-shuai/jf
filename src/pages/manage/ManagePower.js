@@ -162,7 +162,10 @@ componentWillMount(){
              </Table>
         </View>
 
-
+          {/* btm */}
+          <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
              </ScrollView>
                    {/* tan kaung xz */}
                    <Overlay visible={this.state.visible} onBackdropPress={()=>{
@@ -183,6 +186,7 @@ componentWillMount(){
                        )
                       })
                   }
+        
               </ScrollView>
     <TouchableOpacity style={{width:'100%',alignItems:'center'}} onPress={()=>{
        this.setState({visible:false})
