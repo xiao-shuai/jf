@@ -105,8 +105,7 @@ class  Manage extends Component{
         }
         
     }
-  
-  componentWillMount(){
+  get=()=>{
     fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
     .then(res=>res.json())
     .then(res=>{
@@ -115,7 +114,10 @@ class  Manage extends Component{
 
     ).catch(err=>{
         
-    })       
+    })  
+  }
+  componentWillMount(){
+     this.get()
   }
   onRefresh=()=>{
       console.log('6666')
@@ -212,9 +214,11 @@ class  Manage extends Component{
 
                           this.setState({
                               visible:false,
-                              in:index
+                              in:index,
+                              show:true
                             })
                         this.onRefresh()
+                        this.get()
                        }} style={ys.dizhi}>
                        <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                        </TouchableOpacity>

@@ -78,7 +78,8 @@ class ManagePower extends Component {
             step: 'end',
             data:[450, 432, 401, 454, 590, 530, 510]
         }
-    ]
+    ],
+    color:['#40E0D0','#00FA9A','#00BFFF']
       }  
     }
 componentWillMount(){
@@ -127,7 +128,7 @@ componentWillMount(){
                     // <Button type='primary' size='small' onPress={()=>Toast.info('You clicked on me ! !')}>查看</Button>
                 ],
                 [
-                    '合计',
+                    'total',
                     1450,
                     835,
                     515,

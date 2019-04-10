@@ -91,7 +91,8 @@ class ManageAnalyze extends Component {
                         ]
                     }
                 }
-            ]
+            ],
+            color:['#87CEFA','#00CED1']
         }
         this.option2 = {
             title: {
@@ -174,11 +175,12 @@ class ManageAnalyze extends Component {
                     areaStyle: {normal: {}},
                     data:[820, 932, 901, 934, 1290,]
                 }
-            ]
+            ],
+            color:['#1E90FF','#20B2AA','#48D1CC','#AFEEEE','#40E0D0']
         };
     }
 
-componentWillMount(){
+   get=()=>{
     fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
     .then(res=>res.json())
     .then(res=>{
@@ -187,7 +189,10 @@ componentWillMount(){
 
     ).catch(err=>{
         
-    })    
+    })  
+   } 
+componentWillMount(){
+  this.get()
 }
 
     render(){
@@ -242,8 +247,10 @@ componentWillMount(){
                            <TouchableOpacity onPress={()=>{
                               this.setState({
                                   visible:false,
-                                  in:index
+                                  in:index,
+                                  show:true
                                 })
+                                this.get()
                            }} style={ys.dizhi}>
                            <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                            </TouchableOpacity>

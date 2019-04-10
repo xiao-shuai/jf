@@ -28,7 +28,8 @@ class  Login extends Component{
     constructor(props){
         super(props)
         this.state={
-           isloading:true
+           isloading:true,
+           visable:false,
         }
         this.option=[
             {
@@ -82,6 +83,25 @@ submit=()=>{
            })
     }
 } 
+wj=()=>{
+    if(this.state.wjzh==undefined||this.state.wjemail==undefined||this.state.wjphone==undefined){
+        this.refs.toast.show('Please enter the complete information',1000)
+    }else{
+        fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/user',{
+           method:'POST' 
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({visable:false,wjemail:undefined,wjphone:undefined,wjzh:undefined})
+            this.refs.toast.show('We will contact you within 1-3 working days',1000)
+           console.log('res--!',res)
+        }
+    
+        ).catch(err=>{
+            console.log('err--',err)
+        })   
+    }
+}
     render(){
         if(this.state.isloading){
             return(
@@ -113,12 +133,51 @@ submit=()=>{
                 >
                     <Text style={{fontSize:20,color:'white'}}>Login</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={{height:qj.h*.05,width:qj.w*.9,alignItems:'flex-end',justifyContent:'center'}}
+                   onPress={()=>{
+                       this.setState({visable:true})
+                   }}
+                >
+                    <Text style={{fontSize:15,color:'white'}}>Forgot password ?</Text>
+                </TouchableOpacity>
             </View>
 
              </ImageBackground>
              </ScrollView>
 
+ <Overlay overlayStyle={{height:qj.h*.45,alignItems:'center'}} 
+ visible={this.state.visable}
+ onBackdropPress={()=>{
+     this.setState({visable:false})
+ }}>
+               <TextInput style={[ys.tin,{backgroundColor:qj.themeColor,width:'100%'}]} onChangeText={(wjzh)=>{
+         this.setState({wjzh})
+                }} placeholder="Please enter the account" placeholderTextColor='white'/>
 
+                <TextInput style={[ys.tin,{backgroundColor:qj.themeColor,width:'100%'}]} 
+                // secureTextEntry={true}
+                 placeholder="Please enter the email" 
+                 placeholderTextColor='white'
+                 onChangeText={(wjemail)=>{
+         this.setState({wjemail})
+                }} />
+                 <TextInput style={[ys.tin,{backgroundColor:qj.themeColor,width:'100%'}]} 
+                
+                 placeholder="Please enter the phone number" 
+                 placeholderTextColor='white'
+                 onChangeText={(wjphone)=>{
+         this.setState({wjphone})
+                }} />
+                <TouchableOpacity style={[ys.tin,{backgroundColor:qj.themeColor,alignItems:'center',justifyContent:'center',width:'100%'}]}
+                      onPress={()=>{
+                        // this.submit()
+                        this.wj()
+                      }}
+                >
+                    <Text style={{fontSize:20,color:'white'}}>Submit</Text>
+                </TouchableOpacity>
+                <Text style={{marginTop:5,color:qj.themeColor}}>We will contact you within 1-3 working days</Text>
+ </Overlay>
 
   <Toast
 ref="toast"

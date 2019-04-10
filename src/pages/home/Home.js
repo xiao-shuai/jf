@@ -177,7 +177,9 @@ onRefresh=()=>{
                     }
                 }
             }
-        ]
+        ],
+        color:['#87CEEB','#40E0D0','#48D1CC','#00BFFF']
+        
       };
      const option2 = {
         title: {
@@ -223,7 +225,8 @@ onRefresh=()=>{
                 data:[220, 182, 191, 234, 290, 330, 310]
             },
            
-        ]
+        ],
+        color:['#00CED1','#00BFFF']
     };
     
         return(

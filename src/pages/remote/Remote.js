@@ -109,17 +109,19 @@ class  Remote extends Component{
         
     })   
     }
+get=()=>{
+  fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+  .then(res=>res.json())
+  .then(res=>{
+     this.setState({isloading:false}) 
+  }
 
+  ).catch(err=>{
+      
+  })    
+}
   componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({isloading:false}) 
-    }
-
-    ).catch(err=>{
-        
-    })    
+    this.get()
   }  
 
   reset=(num)=>{
@@ -366,9 +368,11 @@ alignItems:'center'
                        <TouchableOpacity onPress={()=>{
                           this.setState({
                               visible:false,
-                              in:index
+                              in:index,
+                              isloading:true
                             })
                             this.onRefresh()
+                            this.get()
                        }} style={ys.dizhi} key={index}>
                        <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                        </TouchableOpacity>

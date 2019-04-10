@@ -89,7 +89,8 @@ componentWillMount(){
                     }
                 },
                 
-            ]
+            ],
+            color:['#00BFFF','#00CED1'],
         };
      const options = {
             tableHead: ['Time', 'PF', 'PFa', 'PFb', 'PFc'],
@@ -118,7 +119,7 @@ componentWillMount(){
                     // <Button type='primary' size='small' onPress={()=>Toast.info('You clicked on me ! !')}>查看</Button>
                 ],
                 [
-                    '合计',
+                    'total',
                     1450,
                     835,
                     515,

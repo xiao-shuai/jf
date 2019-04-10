@@ -117,8 +117,12 @@ class ManageZhilu extends Component {
         },
         series: [{
             data: [120, 200, 150, 80, 70],
-            type: 'bar'
-        }]
+            type: 'bar',
+            itemStyle:{
+                color:'gold'
+            }
+        }],
+        color:[qj.themeColor]
        }
        this.option12={
         legend:{
@@ -144,7 +148,8 @@ class ManageZhilu extends Component {
             type: 'line',
             smooth: true
         }
-        ]
+        ],
+        color:['#40E0D0','#008080'],
        }
 
 const xAxisData = [];
@@ -200,6 +205,7 @@ for (var i = 0; i < 100; i++) {
             return idx * 10 + 100;
         }
     }],
+    color:['#00FFFF','#00CED1'],
     animationEasing: 'elasticOut',
     animationDelayUpdate: function (idx) {
         return idx * 5;
@@ -342,7 +348,8 @@ this.option22={
             label: seriesLabel,
             data: [220, 82, 63]
         }
-    ]
+    ],
+    color:['#00FFFF','#00CED1','#20B2AA'],
 }
 
 this.option3={
@@ -391,7 +398,8 @@ this.option3={
             data:[220, 182, 191, 234, 290, 330, 310]
         },
 
-    ]
+    ],
+    color:['#00FFFF','#00CED1','#20B2AA'],
 }   
 
 this.option32={
@@ -454,7 +462,8 @@ this.option32={
             },
             data: [220, 182, 191, 234, 290, 330, 310]
         },
-    ]  
+    ]  ,
+    color:['#00FFFF','#00CED1','#00FA9A'],
 }
 
 this.option4={
@@ -500,8 +509,8 @@ this.option4={
             step: 'middle',
             data:[220, 282, 201, 234, 290, 430, 410]
         },
-
-    ]
+    ],
+    color:['#00FFFF','#00CED1'],
 }
 
 this.option42={
@@ -544,7 +553,8 @@ this.option42={
                 
             ]
         }
-    ]
+    ],
+    color:['#40E0D0','#008080'],
 }
 this.biaoge=[
     {
@@ -653,7 +663,8 @@ this.biaoge=[
        }         
 ]
     }
-componentWillMount(){
+
+  get=()=>{
     fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
     .then(res=>res.json())
     .then(res=>{
@@ -663,6 +674,10 @@ componentWillMount(){
     ).catch(err=>{
         
     }) 
+  }
+
+componentWillMount(){
+   this.get()
 }
     render(){
         if(this.state.show){
@@ -834,8 +849,10 @@ componentWillMount(){
                            <TouchableOpacity onPress={()=>{
                               this.setState({
                                   visible:false,
-                                  in:index
+                                  in:index,
+                                  show:true
                                 })
+                                this.get()
                            }} style={ys.dizhi}>
                            <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                            </TouchableOpacity>

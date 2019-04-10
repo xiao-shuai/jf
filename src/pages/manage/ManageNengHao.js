@@ -60,16 +60,20 @@ class ManageNengHao extends Component {
        
     }
 
-    componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({show:false}) 
+    get=()=>{
+        fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+        .then(res=>res.json())
+        .then(res=>{
+           this.setState({show:false}) 
+        }
+    
+        ).catch(err=>{
+            
+        }) 
     }
 
-    ).catch(err=>{
-        
-    }) 
+    componentWillMount(){
+    this.get()
     }
 
     render(){
@@ -329,8 +333,10 @@ const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
                            <TouchableOpacity onPress={()=>{
                               this.setState({
                                   visible:false,
-                                  in:index
+                                  in:index,
+                                  show:true
                                 })
+                                this.get()
                            }} style={ys.dizhi}>
                            <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                            </TouchableOpacity>

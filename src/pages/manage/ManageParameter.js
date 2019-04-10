@@ -76,7 +76,7 @@ class ManageParameter extends Component {
               },
         ]
     }
-  componentWillMount(){
+   get=()=>{
     fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
     .then(res=>res.json())
     .then(res=>{
@@ -86,6 +86,10 @@ class ManageParameter extends Component {
     ).catch(err=>{
         
     }) 
+   }
+    
+  componentWillMount(){
+    this.get()
   }
     render(){
         if(this.state.show){
@@ -145,8 +149,10 @@ class ManageParameter extends Component {
                            <TouchableOpacity onPress={()=>{
                               this.setState({
                                   visible:false,
-                                  in:index
+                                  in:index,
+                                  show:true
                                 })
+                               this.get()
                            }} style={styles.dizhi}>
                            <Text style={{fontSize:20,color:qj.themebai}} >{item.name}</Text>
                            </TouchableOpacity>

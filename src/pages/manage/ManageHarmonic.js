@@ -83,6 +83,7 @@ class ManageHarmonic extends Component {
                     return idx * 10 + 100;
                 }
             }],
+            color:['#1E90FF','#00CED1'],
             animationEasing: 'elasticOut',
             animationDelayUpdate: function (idx) {
                 return idx * 5;
@@ -142,6 +143,7 @@ class ManageHarmonic extends Component {
                     return idx * 10 + 100;
                 }
             }],
+            color:['#00BFFF','#00FA9A'],
             animationEasing: 'elasticOut',
             animationDelayUpdate: function (idx) {
                 return idx * 6;
