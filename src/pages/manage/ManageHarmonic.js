@@ -52,7 +52,7 @@ class ManageHarmonic extends Component {
                     magicType: {
                         type: ['stack', 'tiled']
                     },
-                    dataView: {},
+                    // dataView: {},
                     // saveAsImage: {
                     //     pixelRatio: 2
                     // }
@@ -111,7 +111,7 @@ class ManageHarmonic extends Component {
                     magicType: {
                         type: ['stack', 'tiled']
                     },
-                    dataView: {},
+                    // dataView: {},
                     // saveAsImage: {
                     //     pixelRatio: 2
                     // }

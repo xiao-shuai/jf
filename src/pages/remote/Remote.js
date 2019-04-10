@@ -189,21 +189,24 @@ class  Remote extends Component{
   {
       index==0?
       <Switch 
-      trackColor={qj.themeColor} 
+      // trackColor={qj.themeColor} 
+      onTintColor={qj.themeColor}
       value={this.state.issw} onValueChange={(value)=>{
          this.setState({issw:value})
          this.refs.toast.show('Operation is successful')
       }} />
       :index==1?
       <Switch 
-      trackColor={qj.themeColor} 
+      // trackColor={'pink'}
+      onTintColor={qj.themeColor}
       value={this.state.issw2} onValueChange={(value)=>{
          this.setState({issw2:value})
          this.refs.toast.show('Operation is successful')
       }} />
       :
       <Switch 
-      trackColor={qj.themeColor} 
+      // trackColor={qj.themeColor} 
+      onTintColor={qj.themeColor}
       value={this.state.issw3} onValueChange={(value)=>{
          this.setState({issw3:value})
          this.refs.toast.show('Operation is successful')
@@ -287,6 +290,10 @@ alignItems:'center'
       )
        })
    }
+   {/* btm */}
+   <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
+         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+       </View>
    </ScrollView>
        {/* reset tk */}
    <Overlay visible={this.state.visible2} onBackdropPress={()=>{

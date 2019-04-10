@@ -178,7 +178,8 @@ class  Manage extends Component{
                  {
                      item.listxq.map((item,index)=>{
                       return(
-                        <TouchableOpacity style={ys.listxq} onPress={()=>{
+
+                        <TouchableOpacity style={[ys.listxq,{borderBottomColor:qj.themehui,borderBottomWidth:1}]} onPress={()=>{
                             this.props.navigation.navigate(item.tiao)
                         }} key={index}>
                         <Text style={{fontSize:18,color:qj.themehui2}}>{item.xq}</Text>
@@ -221,7 +222,7 @@ class  Manage extends Component{
                   })
               }
           </ScrollView>
-<TouchableOpacity style={{width:'100%',alignItems:'center'}} onPress={()=>{
+<TouchableOpacity style={{width:'100%',alignItems:'center',}} onPress={()=>{
    this.setState({visible:false})
 }}>
     <Ionicons  name={'ios-close'} size={50} color={qj.themehui}/>
@@ -236,7 +237,12 @@ class  Manage extends Component{
 }
 const ys=StyleSheet.create({
     listxq:{
-        flexDirection:'row',justifyContent:'space-between',marginTop:10,padding:10
+        flexDirection:'row',
+        justifyContent:'space-between',
+        // padding:20
+        paddingTop:20,
+        paddingBottom:20,
+        paddingLeft:25
     },
    title_left:{
     backgroundColor:qj.themeColor,

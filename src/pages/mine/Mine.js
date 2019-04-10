@@ -128,14 +128,16 @@ class  Mine extends Component{
                   }
               </View>
               {/* btn */}
-              <LinearGradient colors={['#ACB6E5','#74ebd5']} style={ys.btn} >
+
               <TouchableOpacity 
               onPress={()=>{
                 this.logout()
               }}>
+                 <LinearGradient colors={['#ACB6E5','#74ebd5']} style={ys.btn} >
                 <Text style={{fontSize:20,fontWeight:'600',color:'white'}}>Log out</Text>
+                </LinearGradient>
               </TouchableOpacity>  
-              </LinearGradient>
+             
                <Toast
 
 ref="toast"
