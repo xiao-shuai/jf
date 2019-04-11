@@ -142,15 +142,18 @@ class ManageHarmonic extends Component {
               
     }
    componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({show:false}) 
-    }
 
-    ).catch(err=>{
-        
-    }) 
+    let manage=Parse.Object.extend('manage')
+       let  data = new Parse.Query(manage)
+        data.find().then(res=>{
+            console.log('res---!',res)
+            this.setState({
+                show:false,
+                data:res[0].attributes.shebei
+            })
+        }).catch(err=>{
+
+        })
    }
     render(){
         if(this.state.show){

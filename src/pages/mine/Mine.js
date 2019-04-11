@@ -20,7 +20,6 @@ class  Mine extends Component{
     constructor(props){
         super(props)
         this.state={
-           isloading:true,
            cacheSize:"",
            unit:"",
 
@@ -48,15 +47,7 @@ class  Mine extends Component{
     };
 
  componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({isloading:false}) 
-    }
-
-    ).catch(err=>{
-        
-    })   
+ 
  }
    logout=()=>{
        AsyncStorage.removeItem('log')
@@ -64,13 +55,7 @@ class  Mine extends Component{
    } 
     render(){
         const lan=I18n.t('mine')
-        if(this.state.isloading){
-            return(
-                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
-                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
-                 </View>
-            )
-        }
+
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
               <LinearGradient colors={['#74ebd5', '#ACB6E5']} style={{width:qj.w,height:qj.h*.2,

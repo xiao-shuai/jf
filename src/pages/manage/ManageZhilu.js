@@ -20,32 +20,33 @@ class ManageZhilu extends Component {
             in:0,
             dizhi:I18n.t('dizhi')
         }
-        this.six=[
-            {
-                title:'MAX',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'Yesterday,'
-            },
-            {
-                title:'MIN',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'Yesterday,'
-            },
-            {
-                title:'Average',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'Yesterday'
-            },
-            {
-                title:'Divide',
-                num:'2345.66',
-                dw:'Dollar',
-                zt:'Yesterday,'
-            },
-        ] 
+        // this.six=[
+        //     {
+        //         title:'MAX',
+        //         num:'2345.66',
+        //         dw:'kwh',
+        //         zt:'Yesterday,'
+        //     },
+        //     {
+        //         title:'MIN',
+        //         num:'2345.66',
+        //         dw:'kwh',
+        //         zt:'Yesterday,'
+        //     },
+        //     {
+        //         title:'Average',
+        //         num:'2345.66',
+        //         dw:'kwh',
+        //         zt:'Yesterday'
+        //     },
+        //     {
+        //         title:'Divide',
+        //         num:'2345.66',
+        //         dw:'Dollar',
+        //         zt:'Yesterday,'
+        //     },
+        // ] 
+      
         this.six2=[
             {
                 title:'MAX',
@@ -656,13 +657,14 @@ this.biaoge=[
     }
 
   get=()=>{
-    let manage=Parse.Object.extend('manage')
-       let  data = new Parse.Query(manage)
+    let branch=Parse.Object.extend('branch')
+       let  data = new Parse.Query(branch)
         data.find().then(res=>{
             console.log('res---!',res)
             this.setState({
                 show:false,
-                // top4:res[0].attributes.top4,
+                top:res[0].attributes.onetop,
+                twotop:res[0].attributes.twotop
             })
         }).catch(err=>{
 
@@ -673,6 +675,7 @@ componentWillMount(){
    this.get()
 }
     render(){
+        console.log('343',this.state.top)
         if(this.state.show){
             return(
                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -705,7 +708,7 @@ componentWillMount(){
                     </View>
          <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
            {
-               this.six.map((item,index)=>{
+               this.state.top.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
               <View style={{flexDirection:'row'}}>
@@ -738,7 +741,7 @@ componentWillMount(){
                     </View>
      <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
            {
-               this.six2.map((item,index)=>{
+               this.state.twotop.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -801,7 +804,7 @@ componentWillMount(){
 
           <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
            {
-               this.six.map((item,index)=>{
+              this.state.top.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
               <View style={{flexDirection:'row'}}>

@@ -39,39 +39,9 @@ class  Remote extends Component{
             issw:false,
             issw2:true,
             issw3:true,
-
-          data:[
-            {
-              title:'Equipment001', 
-              kai:'true', 
-              maxnum:'92',
-              minnum:'44',
-              left_c:'true',
-              right_c:'false',
-            },
-            {
-               title:'Equipment002', 
-               kai:'false', 
-               maxnum:'88',
-               minnum:'57',
-               left_c:'false',
-               right_c:'true',
-             },
-             {
-               title:'Equipment003', 
-               kai:'false', 
-               maxnum:'66',
-               minnum:'57',
-               left_c:'false',
-               right_c:'true',
-             },
-        ]
+            data:I18n.t('remote').data,
    
         }
-   
-
-  
-     
 
     }
    
@@ -88,15 +58,28 @@ class  Remote extends Component{
     })   
     }
 get=()=>{
-  fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-  .then(res=>res.json())
-  .then(res=>{
-     this.setState({isloading:false}) 
-  }
 
-  ).catch(err=>{
+  // fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+  // .then(res=>res.json())
+  // .then(res=>{
+  //    this.setState({isloading:false}) 
+  // }
+
+  // ).catch(err=>{
       
-  })    
+  // })  
+  
+  let remote=Parse.Object.extend('remote')
+       let  data = new Parse.Query(remote)
+        data.find().then(res=>{
+            console.log('res remote---!',res)
+            this.setState({
+                isloading:false,
+            })
+        }).catch(err=>{
+         console.log('err-!',err)
+        }) 
+  
 }
   componentWillMount(){
     this.get()

@@ -36,6 +36,33 @@ export default {
         btm:'-------- 我是有底线的 --------',
         title:'远程控制',
         sm:'最值可勾选单一值，也可勾选双向值，不设置',
+        data:[
+            {
+              title:'设备001', 
+              kai:'true', 
+              maxnum:'92',
+              minnum:'44',
+              left_c:'true',
+              right_c:'false',
+            },
+            {
+               title:'设备002', 
+               kai:'false', 
+               maxnum:'88',
+               minnum:'57',
+               left_c:'false',
+               right_c:'true',
+             },
+             {
+               title:'设备003', 
+               kai:'false', 
+               maxnum:'66',
+               minnum:'57',
+               left_c:'false',
+               right_c:'true',
+             },
+        ],
+   
         dizhi:[
             {
                 name:'金凤科技大厦',

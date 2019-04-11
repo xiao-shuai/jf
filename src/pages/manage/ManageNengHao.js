@@ -19,9 +19,6 @@ class ManageNengHao extends Component {
             in:0,
             dizhi:I18n.t('dizhi')
         }
-
-        
-
        
     }
 

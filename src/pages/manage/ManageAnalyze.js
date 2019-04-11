@@ -12,6 +12,7 @@ import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Echarts from 'native-echarts';
 import I18n from '../../data/i18n'
+import Parse from 'parse/react-native'
 class ManageAnalyze extends Component {
     constructor(props){
         super(props)
@@ -177,7 +178,6 @@ class ManageAnalyze extends Component {
             console.log('res---!',res)
             this.setState({
                 show:false,
-                // top4:res[0].attributes.top4,
             })
         }).catch(err=>{
 

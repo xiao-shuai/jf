@@ -8,7 +8,7 @@ import { Divider,Overlay } from 'react-native-elements'
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from '../../data/i18n'
-
+import Parse from 'parse/react-native'
 class  Manage extends Component{
 
     constructor(props){
@@ -19,7 +19,7 @@ class  Manage extends Component{
             visible:false,
             in:0,
             dizhi:I18n.t('dizhi'),
-
+            data:I18n.t('manage').data 
         }
         
     }

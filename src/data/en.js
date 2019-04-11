@@ -34,6 +34,33 @@ export default {
         btm:'-------- This is the bottom --------',
         title:'Remote',
         sm:'The value can be checked a single value, also can check the two-way values',
+        data:[
+            {
+              title:'Equipment001', 
+              kai:'true', 
+              maxnum:'92',
+              minnum:'44',
+              left_c:'true',
+              right_c:'false',
+            },
+            {
+               title:'Equipment002', 
+               kai:'false', 
+               maxnum:'88',
+               minnum:'57',
+               left_c:'false',
+               right_c:'true',
+             },
+             {
+               title:'Equipment003', 
+               kai:'false', 
+               maxnum:'66',
+               minnum:'57',
+               left_c:'false',
+               right_c:'true',
+             },
+        ],
+   
         dizhi:[
             {
                 name:'Jinfeng technology building',
