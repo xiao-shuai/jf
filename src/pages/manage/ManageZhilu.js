@@ -9,6 +9,8 @@ import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Echarts from 'native-echarts';
 import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-view'
+import I18n from '../../data/i18n'
+import Parse from 'parse/react-native'
 class ManageZhilu extends Component {
     constructor(props){
         super(props)
@@ -16,18 +18,7 @@ class ManageZhilu extends Component {
             show:true,
             visible:false,
             in:0,
-            dizhi:[
-                {
-                    name:'Jinfeng technology building',
-        
-                    },
-                    {
-                    name:'Golden dragon technology building',
-                    },
-                    {
-                    name:'Jianwai technology building',
-                    }
-            ],
+            dizhi:I18n.t('dizhi')
         }
         this.six=[
             {
@@ -665,15 +656,17 @@ this.biaoge=[
     }
 
   get=()=>{
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({show:false}) 
-    }
+    let manage=Parse.Object.extend('manage')
+       let  data = new Parse.Query(manage)
+        data.find().then(res=>{
+            console.log('res---!',res)
+            this.setState({
+                show:false,
+                // top4:res[0].attributes.top4,
+            })
+        }).catch(err=>{
 
-    ).catch(err=>{
-        
-    }) 
+        })
   }
 
 componentWillMount(){

@@ -8,7 +8,8 @@ import { Divider,Overlay } from 'react-native-elements'
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Echarts from 'native-echarts';
-
+import I18n from '../../data/i18n'
+import Parse from 'parse/react-native'
 class ManageNengHao extends Component {
     constructor(props){
         super(props)
@@ -16,60 +17,28 @@ class ManageNengHao extends Component {
             show:true,
             visible:false,
             in:0,
-            dizhi:[
-                {
-                    name:'Jinfeng technology building',
-        
-                    },
-                    {
-                    name:'Golden dragon technology building',
-                    },
-                    {
-                    name:'Jianwai technology building',
-                    }
-            ],
+            dizhi:I18n.t('dizhi')
         }
 
-        this.six=[
-            {
-                title:'sequential +10%',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'Yesterday,'
-            },
-            {
-                title:'sequential +0%',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'Yesterday,'
-            },
-            {
-                title:'sequential +7%',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'Yesterday,'
-            },
-            {
-                title:'sequential +9%',
-                num:'2345.66',
-                dw:'Dollar',
-                zt:'Yesterday,'
-            },
-        ]
+        
 
        
     }
 
     get=()=>{
-        fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-        .then(res=>res.json())
-        .then(res=>{
-           this.setState({show:false}) 
-        }
-    
-        ).catch(err=>{
-            
-        }) 
+        let manage=Parse.Object.extend('manage')
+       let  data = new Parse.Query(manage)
+        data.find().then(res=>{
+            console.log('res---!',res)
+            this.setState({
+                show:false,
+                top4:res[0].attributes.top4,
+            })
+        }).catch(err=>{
+
+        })
+        
+
     }
 
     componentWillMount(){
@@ -77,6 +46,8 @@ class ManageNengHao extends Component {
     }
 
     render(){
+        console.log('show',this.state.top4)
+       const lan=I18n.t('manage')
         if(this.state.show){
             return(
                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -89,7 +60,7 @@ const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
      const   option = {
             backgroundColor: '#2c343c',    
             title: {
-                text: 'Customized Pie',
+                text: 'breakdown',
                 left: 'center',
                 top: 20,
                 textStyle: {
@@ -120,8 +91,7 @@ const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
                         {value:335, name:'Air'},
                         {value:310, name:'Socket'},
                         {value:274, name:'Power'},
-                        // {value:235, name:'视频广告'},
-                        // {value:400, name:'搜索引擎'}
+                       
                     ].sort(function (a, b) { return a.value - b.value; }),
                     roseType: 'radius',
                     label: {
@@ -188,7 +158,7 @@ const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
                     axisPointer: {
                         label: {
                             formatter: function (params) {
-                                return '降水量  ' + params.value
+                                return 'water ' + params.value
                                     + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
                             }
                         }
@@ -209,7 +179,7 @@ const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
                     axisPointer: {
                         label: {
                             formatter: function (params) {
-                                return '降水量  ' + params.value
+                                return '降水量' + params.value
                                     + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
                             }
                         }
@@ -257,40 +227,40 @@ const colors = ['#00FFFF', '#00CED1', '#87CEFA'];
 
                   <ScrollView>
                       <ImageBackground source={require('../../img/nhbj.png')} style={{width:qj.w,height:qj.h*.3,marginTop:10}}>
-                         <Text style={{fontSize:25,color:'white',marginLeft:'6%',marginTop:10}}>Jinyanlong building park</Text>
+                         <Text style={{fontSize:25,color:'white',marginLeft:'6%',marginTop:10}}>{this.state.dizhi[this.state.in].name}</Text>
                          <Text style={{fontSize:18,color:'white',marginLeft:'6%',marginTop:10}}>Total floor area:2000㎡</Text>
                          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginTop:qj.h*.09,padding:10}}>
                              <View style={{alignItems:'center',}}>
                                  <Ionicons  name={'ios-business'} size={30} color={qj.themeColor}/>
-                                 <Text style={{color:'white',fontSize:18}}>18 units</Text>
-                                 <Text style={{color:'white',fontSize:18}}>Main</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.tit4}</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.xia4}</Text>
                              </View>
                              <View style={{alignItems:'center'}}>
                                  <Ionicons name={'ios-settings'} size={30} color={qj.themeColor}/>
-                                 <Text style={{color:'white',fontSize:18}}>150KVA</Text>
-                                 <Text style={{color:'white',fontSize:18}}>Capacity</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.tit}</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.xia}</Text>
                              </View>
                              <View style={{alignItems:'center'}}>
                                  <Ionicons name={'ios-bulb'} size={30} color={qj.themeColor}/>
-                                 <Text style={{color:'white',fontSize:18}}>200 number</Text>
-                                 <Text style={{color:'white',fontSize:18}}>Measurement</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.tit2}</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.xia2}</Text>
                              </View>
                              <View style={{alignItems:'center'}}>
                                  <Ionicons name={'ios-flower'} size={30} color={qj.themeColor}/>
-                                 <Text style={{color:'white',fontSize:18}}>140KVA</Text>
-                                 <Text style={{color:'white',fontSize:18}}>Operating</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.tit3}</Text>
+                                 <Text style={{color:'white',fontSize:18}}>{this.state.top4.xia3}</Text>
                              </View>
                          </View>
                       </ImageBackground>
                       {/* 当年能耗 */}
                       <View style={{flexDirection:'row',backgroundColor:qj.themehui,marginTop:8,alignItems:'center',padding:10}}>
                           <Ionicons name={'ios-information-circle-outline'} size={30} color={qj.themeColor}/>
-                          <Text style={{fontSize:20,marginLeft:10,fontWeight:'600',color:qj.themeColor}}>The energy consumption</Text>
+                          <Text style={{fontSize:20,marginLeft:10,fontWeight:'600',color:qj.themeColor}}>{lan.nyxh}</Text>
                       </View>
                       {/* 4 tab */}
                <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
                      {
-                  this.six.map((item,index)=>{
+                  lan.ftab.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
               <View style={{flexDirection:'row'}}>

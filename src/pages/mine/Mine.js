@@ -14,6 +14,7 @@ import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import clear from 'react-native-clear-app-cache'
+import I18n from '../../data/i18n'
 class  Mine extends Component{
 
     constructor(props){
@@ -30,20 +31,6 @@ class  Mine extends Component{
                 unit:unit  //缓存单位
             })
         });
-        this.option=[
-            {
-             title:'Clear cache',
-             tiao:'',
-            },
-            {
-             title:'About us',
-             tiao:'About',
-            },
-            {
-             title:'Feedback',
-             tiao:'FeedBack',
-            }
-        ]
 
     }
 
@@ -76,6 +63,7 @@ class  Mine extends Component{
        this.props.navigation.navigate('Login')
    } 
     render(){
+        const lan=I18n.t('mine')
         if(this.state.isloading){
             return(
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -87,14 +75,16 @@ class  Mine extends Component{
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
               <LinearGradient colors={['#74ebd5', '#ACB6E5']} style={{width:qj.w,height:qj.h*.2,
                 alignItems:'center',justifyContent:'center'}}>
-              <Text style={{fontSize:20,color:qj.themebai,fontWeight:'600'}}>Energy Internet big data platform</Text>
-              <Text style={{marginTop:8,color:'white'}}>----- Logged account -----</Text>
+              <Text style={{fontSize:20,color:qj.themebai,fontWeight:'600'}}>{lan.title}</Text>
+              <Text style={{marginTop:8,color:'white'}}>{lan.log}</Text>
+             
+            
               </LinearGradient>
               {/* under */}
             
               <View style={{width:qj.w,marginTop:10}}>
                   {
-                      this.option.map((item,index)=>{
+                      lan.option.map((item,index)=>{
                        return(
              
                       <TouchableOpacity style={{
@@ -134,7 +124,7 @@ class  Mine extends Component{
                 this.logout()
               }}>
                  <LinearGradient colors={['#ACB6E5','#74ebd5']} style={ys.btn} >
-                <Text style={{fontSize:20,fontWeight:'600',color:'white'}}>Log out</Text>
+                <Text style={{fontSize:20,fontWeight:'600',color:'white'}}>{lan.logout}</Text>
                 </LinearGradient>
               </TouchableOpacity>  
              

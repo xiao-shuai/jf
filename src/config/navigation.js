@@ -14,6 +14,7 @@ import {Home,Mine,Remote,Manage,
 } from  '../pages/all';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {qj} from './style'
+import I18n from '../data/i18n'
 
 const BottomTab=createBottomTabNavigator(
     {

@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { qj } from '../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Toast, {DURATION} from 'react-native-easy-toast'
+import Parse from 'parse/react-native'
 
 const  resetAction = StackActions.reset({
     index: 0,
@@ -31,33 +32,12 @@ class  Login extends Component{
            isloading:true,
            visable:false,
         }
-        this.option=[
-            {
-             title:'Version update',
-             tiao:'',
-            },
-            {
-             title:'About us',
-             tiao:'About',
-            },
-            {
-             title:'Feedback',
-             tiao:'FeedBack',
-            }
-        ]
+       
 
     }
 
  componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({isloading:false}) 
-    }
-
-    ).catch(err=>{
-        
-    })   
+    
  }
     
 submit=()=>{
@@ -67,20 +47,17 @@ submit=()=>{
     } else if(this.state.mm==undefined){
         this.refs.toast.show('Please enter the password',1000)
     }else {
-        fetch('https://easy-mock.com/mock/5ca20f900aa7bf50eb36bcb0/baoxiu/order',{
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            
-           }).then(res=>res.json()).then(res=>{
-              this.refs.toast.show('Login successful',1000)
-              AsyncStorage.setItem('log','okok')
-              this.props.navigation.dispatch(resetAction);
-           }).catch(err=>{
-                console.log('err--!',err)
-           })
+
+        Parse.User.logIn(this.state.zh, this.state.mm).then(res=>{
+            console.log(res)
+            AsyncStorage.setItem('log','okok')
+            this.props.navigation.dispatch(resetAction)
+           
+        }
+        ).catch(err=>{
+            this.refs.toast.show('Login error',1000)
+            console.log(err)
+        })
     }
 } 
 wj=()=>{
@@ -103,13 +80,7 @@ wj=()=>{
     }
 }
     render(){
-        if(this.state.isloading){
-            return(
-                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
-                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
-                 </View>
-            )
-        }
+        
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
              <ScrollView contentContainerStyle={{alignItems:'center'}} showsVerticalScrollIndicator={false}>

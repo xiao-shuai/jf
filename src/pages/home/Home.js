@@ -18,8 +18,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import MapView , { AnimatedRegion, Marker,Callout }from 'react-native-maps';
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {lan,setLanguage} from '../../data/i18n'
+import I18n from '../../data/i18n'
 import Parse from 'parse/react-native'
+
 
 @inject(["homeStore"])
 @observer // 监听当前组件
@@ -32,63 +33,23 @@ class  Home extends Component{
         refresh:false,
         loading:true,
         threetab:[],
-        fourtab:[]
+        fourtab:[],
+        log:[]
         }
-        this.log=[
-            {
-                latitude: 37.77725,
-                longitude: -122.4724,
-                title:'Building A',
-                title2:'Daily',
-                title3:'Month',
-                title4:'Years',
-                title5:'Total',
-                title2_num:'1000kw',
-                title3_num:'2100kw',
-                title4_num:'7900kw',
-                title5_num:'11333kw',
-            },
-            {
-                latitude: 37.77985,
-                longitude: -122.44,
-                title:'Building B',
-
-                title2:'Daily',
-                title3:'Month',
-                title4:'Years',
-                title5:'Total',
-
-                title2_num:'2200kw',
-                title3_num:'2800kw',
-                title4_num:'8600kw',
-                title5_num:'11633kw',
-            },
-            {
-                latitude: 37.78825,
-                longitude: -122.42,
-                title:'Building C',
-
-                title2:'Daily',
-                title3:'Month',
-                title4:'Years',
-                title5:'Total',
-
-                title2_num:'1300kw',
-                title3_num:'2100kw',
-                title4_num:'8100kw',
-                title5_num:'11433kw',
-            }
-        ]
+       
     }
 componentWillMount(){
-  let userdata=Parse.Object.extend('home')
-  let user = new Parse.Query(userdata)
+  let home=Parse.Object.extend('home')
+  let user = new Parse.Query(home)
     user.find().then(res=>{
         console.log('res---!',res)
-    
         this.setState({
             threetab:res[0].attributes.hometab3,
             fourtab:res[0].attributes.hometab4,
+            log:res[0].attributes.log,
+            option1:res[0].attributes.option1,
+            option2:res[0].attributes.option2,
+            map:res[0].attributes.map,
             loading:false
         })
     }
@@ -103,11 +64,10 @@ islogin=()=>{
  AsyncStorage.getItem('log').then(res=>{
     console.log('login--!',res)
     if(res==null){
-     this.props.navigation.navigate('Login')
+        this.props.navigation.navigate('Login')
     }
 
  }).catch(err=>{
-  
     console.log('errr--!',err)
  })
 }
@@ -132,6 +92,11 @@ onRefresh=()=>{
     })
 }
     render(){
+        console.log('log??',this.state.map)
+        const option1=this.state.option1
+        const option22=this.state.option2
+        const map=this.state.map
+        const lan=I18n.t('home')
         if(this.state.loading){
             return (
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -141,7 +106,7 @@ onRefresh=()=>{
         }
     const option = {
         title : {
-            text: 'Energy',
+            text: lan.tb_one_t,
             subtext: '(KWH)',
             x:'center'
         },
@@ -161,11 +126,10 @@ onRefresh=()=>{
                 radius : '55%',
                 center: ['50%', '60%'],
                 data:[
-                    {value:335, name:'air-condition'},
-                    {value:310, name:'The-socket'},
-                    {value:234, name:'power'},
-                    {value:135, name:'special'},
-                   
+                    {value:option1.value, name:'air-condition'},
+                    {value:option1.value2, name:'The-socket'},
+                    {value:option1.value3, name:'power'},
+                    {value:option1.value4, name:'special'},
                 ],
                 itemStyle: {
                     // color:['#87CEFA','#20B2AA','#48D1CC','#AFEEEE'],
@@ -183,7 +147,7 @@ onRefresh=()=>{
       };
      const option2 = {
         title: {
-            text: 'Electricity curve'
+            text:lan.fuhe
         },
         tooltip: {
             trigger: 'axis'
@@ -216,13 +180,13 @@ onRefresh=()=>{
                 name:'Today',
                 type:'line',
                 stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
+                data:[option22.value, option22.value2, option22.value3, option22.value4, option22.value5, option22.value6, option22.value7]
             },
             {
                 name:'Yesterday',
                 type:'line',
                 stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
+                data:[option22.value8, option22.value9, option22.value10, option22.value11, option22.value12, option22.value13, option22.value14]
             },
            
         ],
@@ -238,14 +202,14 @@ onRefresh=()=>{
               <MapView  
               style={styles.map}
               region={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitude: map.latitude,
+              longitude:map.longitude,
+              latitudeDelta: map.latitudeDelta,
+              longitudeDelta: map.longitudeDelta,
            }}  
         >
         {
-            this.log.map((item,index)=>{
+            this.state.log.map((item,index)=>{
              return(
           
           <Marker coordinate={{
@@ -336,7 +300,7 @@ onRefresh=()=>{
        <Echarts option={option2} height={300}/>
        {/* btm */}
        <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
-         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+         <Text style={{color:qj.themehui,}}>{lan.btm}</Text>
        </View>
             </ScrollView>
             </SafeAreaView>

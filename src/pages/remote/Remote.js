@@ -17,7 +17,8 @@ import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import { TextInput } from 'react-native-gesture-handler';
-
+import I18n from '../../data/i18n'
+import Parse from 'parse/react-native'
 class  Remote extends Component{
 
     constructor(props){
@@ -38,30 +39,7 @@ class  Remote extends Component{
             issw:false,
             issw2:true,
             issw3:true,
-            dizhi:[
-                {
-                    name:'Jinfeng technology building',
-        
-                    },
-                    {
-                    name:'Golden dragon technology building',
-                    },
-                    {
-                    name:'Jianwai technology building',
-                    }
-            ],
-          sb:[
-              {
-                title:'AAAA',
-                maxnum:'888',
-                minnum:'100',
-              },
-              {
-                title:'BBBB',
-                maxnum:'888',
-                minnum:'100',
-              }
-          ],
+
           data:[
             {
               title:'Equipment001', 
@@ -146,6 +124,7 @@ get=()=>{
 }
 
     render(){
+      const lan=I18n.t('remote')
         if(this.state.isloading){
             return(
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -157,7 +136,7 @@ get=()=>{
             <SafeAreaView style={{flex:1}}>
  {/* title */}
  <View style={{width:qj.w,}}>
-              <Text style={{fontSize:20,fontWeight:'500',textAlign:'center'}}>Romote</Text>
+              <Text style={{fontSize:20,fontWeight:'500',textAlign:'center'}}>{lan.title}</Text>
               <Divider style={{backgroundColor:qj.themehui,height:5,marginTop:5}}/>
   </View>
 
@@ -167,14 +146,14 @@ get=()=>{
                       this.setState({visible:true})
                   }}>
                    <Text style={{width:'85%',fontSize:18,color:qj.themeColor}}>{
-                       this.state.dizhi[this.state.in].name
+                       lan.dizhi[this.state.in].name
                        }</Text>
                   <Ionicons name={'ios-arrow-down'} size={25} color={qj.themehui2}/>
                   </TouchableOpacity>
      </View>
      {/* shuo ming */}
-     <View style={{width:qj.w,backgroundColor:qj.themehui,marginTop:10,padding:10}}>
-         <Text style={{color:qj.themehui2}}>The maximum value can be checked one or two items, do not set do not check can be</Text>
+     <View style={{width:qj.w,backgroundColor:qj.themehui,marginTop:10,padding:10,alignItems:'center'}}>
+         <Text style={{color:qj.themehui2}}>{lan.sm}</Text>
      </View>
 
    {/* list */}
@@ -294,7 +273,7 @@ alignItems:'center'
    }
    {/* btm */}
    <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
-         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+         <Text style={{color:qj.themehui,}}>{lan.btm}</Text>
        </View>
    </ScrollView>
        {/* reset tk */}
@@ -363,7 +342,7 @@ alignItems:'center'
          }}>
           <ScrollView contentContainerStyle={{alignItems:'center'}}>
               {
-                  this.state.dizhi.map((item,index)=>{
+                  lan.dizhi.map((item,index)=>{
                    return (
                        <TouchableOpacity onPress={()=>{
                           this.setState({

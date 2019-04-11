@@ -8,7 +8,8 @@ import { Divider,Overlay } from 'react-native-elements'
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Echarts from 'native-echarts';
-
+import I18n from '../../data/i18n'
+import Parse from 'parse/react-native'
 class ManageHarmonic extends Component {
     constructor(props){
         super(props)
@@ -16,18 +17,7 @@ class ManageHarmonic extends Component {
             show:true,
             visible:false,
             in:0,
-            dizhi:[
-                {
-                    name:'Jinfeng technology building',
-        
-                    },
-                    {
-                    name:'Golden dragon technology building',
-                    },
-                    {
-                    name:'Jianwai technology building',
-                    }
-            ],
+            dizhi:I18n.t('dizhi')
         }
 
         const xAxisData = [];

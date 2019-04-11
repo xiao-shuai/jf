@@ -9,7 +9,8 @@ import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Echarts } from 'native-echarts/src/components';
 import {Row, Rows, Table} from 'react-native-table-component';
-
+import I18n from '../../data/i18n'
+import Parse from 'parse/react-native'
 class ManageMonitor extends Component {
     constructor(props){
         super(props)
@@ -17,18 +18,7 @@ class ManageMonitor extends Component {
             show:true,
             visible:false,
             in:0,
-            dizhi:[
-                {
-                    name:'Jinfeng technology building',
-        
-                    },
-                    {
-                    name:'Golden dragon technology building',
-                    },
-                    {
-                    name:'Jianwai technology building',
-                    }
-            ],
+            dizhi:I18n.t('dizhi')
         }
     }
 componentWillMount(){

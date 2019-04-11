@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-navigation';
 import { Divider,Overlay } from 'react-native-elements'
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import I18n from '../../data/i18n'
 
 class  Manage extends Component{
 
@@ -17,104 +18,23 @@ class  Manage extends Component{
             onRefresh:false,
             visible:false,
             in:0,
-            dizhi:[
-                {
-                name:'Jinfeng technology building',
-    
-                },
-                {
-                name:'Golden dragon technology building',
-                },
-                {
-                name:'Jianwai technology building',
-                }
-            ],
-
-            list:[
-                //  {
-                //  title:'Real-time monitoring',
-                 
-                //  listxq:[ 
-                //      {
-                //          xq:'Equipment diagram',
-                //          tiao:'ManagePic'
-                //      },
-                //      {
-                //         xq:'Equipment data',
-                //         tiao:'ManageData'
-                //     },
-                //     {
-                //         xq:'The fan data',
-                //         tiao:'ManageFan'
-                //     },
-                //     {
-                //         xq:'Photovoltaic (pv) data',
-                //         tiao:'',
-                //     }
-                    
-                //  ]
-                //  },
-                 {
-                    title:'Energy consumption management',
-                    listxq:[
-                        {
-                            xq:'Energy consumption situation',
-                            tiao:'ManageNengHao'
-                        },
-                        {
-                           xq:'Analysis of the',
-                           tiao:'ManageAnalyze'
-                       },
-                       {
-                           xq:'Branch can use',
-                           tiao:'ManageZhilu'
-                       },
-                   
-                    ]
-                    },
-                    {
-                        title:'The power quality',
-                        listxq:[
-                            {
-                                xq:'Power factor',
-                                tiao:'ManagePower',
-                            },
-                            {
-                               xq:'Harmonic factor',
-                               tiao:'ManageHarmonic'
-                           },
-                           
-                        ]
-                        },
-                        {
-                            title:'Equipment management',
-                            listxq:[
-                                {
-                                    xq:'Equipment parameter',
-                                    tiao:'ManageParameter'
-                                },
-                                {
-                                   xq:'Equipment monitoring',
-                                   tiao:'ManageMonitor'
-                               },
-                              
-                            ]
-                            }
-            ]
+            dizhi:I18n.t('dizhi'),
 
         }
         
     }
   get=()=>{
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({show:false}) 
-    }
+    let manage=Parse.Object.extend('manage')
+       let  data = new Parse.Query(manage)
+        data.find().then(res=>{
+            console.log('res---!',res)
+            this.setState({
+                show:false,
+                // top4:res[0].attributes.top4,
+            })
+        }).catch(err=>{
 
-    ).catch(err=>{
-        
-    })  
+        }) 
   }
   componentWillMount(){
      this.get()
@@ -122,16 +42,22 @@ class  Manage extends Component{
   onRefresh=()=>{
       console.log('6666')
       this.setState({onRefresh:true})
-      fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3').then(res=>res.json()).then(res=>{
-          this.setState({onRefresh:false})
-      }
+      let manage=Parse.Object.extend('manage')
+       let  data = new Parse.Query(manage)
+        data.find().then(res=>{
+            console.log('res---!',res)
+            this.setState({
+                show:false,
+                // top4:res[0].attributes.top4,
+            })
+        }).catch(err=>{
 
-      ).catch(err=>{
-          
-      })
+        })
   }
     
     render(){
+        const lan=I18n.t('manage')
+        const dizhi=I18n.t('dizhi')
         if(this.state.show){
             return(
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -143,7 +69,7 @@ class  Manage extends Component{
             <SafeAreaView style={[qj.w*.95,{alignItems:'center',flex:1}]}>
               {/* title */}
               <View style={{width:qj.w,}}>
-              <Text style={{fontSize:20,fontWeight:'500',textAlign:'center'}}>Management</Text>
+              <Text style={{fontSize:20,fontWeight:'500',textAlign:'center'}}>{lan.title}</Text>
               <Divider style={{backgroundColor:qj.themehui,height:5,marginTop:5}}/>
              </View>
            
@@ -166,7 +92,7 @@ class  Manage extends Component{
          }
          >
           {
-              this.state.list.map((item,index)=>{         
+              lan.list.map((item,index)=>{         
                return(
                 <View style={{
                     width:qj.w*.95,
@@ -199,7 +125,7 @@ class  Manage extends Component{
           }
 {/* btm */}
        <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
-         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+         <Text style={{color:qj.themehui,}}>{lan.btm}</Text>
        </View>
         </ScrollView>
             {/* tan kaung xz */}
