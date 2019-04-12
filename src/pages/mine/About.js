@@ -11,42 +11,43 @@ import { Divider,Overlay } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient';
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import Parse from 'parse/react-native'
 class  About extends Component{
 
     constructor(props){
         super(props)
         this.state={
            isloading:true,
-           data:[
-               {
-                icon:'ios-mail',
-                name:'Mail',   
-                phone:'78645227@gmail.com',
-               },
-               {
-                icon:'ios-call',
-                name:'Phone',   
-                phone:'86-10-66778899',
-               },
-           ]
         }
 
     }
 
  componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({isloading:false}) 
-    }
+    let About=Parse.Object.extend('about')
+    let  data = new Parse.Query(About)
+     data.find().then(res=>{
+         console.log('res---!',res)
+         this.setState({
+             isloading:false,
+             sj:res[0].attributes.data,
+             
+         })
+     }).catch(err=>{
+       console.log('err111',err)
+     })
+    // fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    // .then(res=>res.json())
+    // .then(res=>{
+    //    this.setState({isloading:false}) 
+    // }
 
-    ).catch(err=>{
+    // ).catch(err=>{
         
-    })   
+    // })   
  }
     
     render(){
+       
         if(this.state.isloading){
             return(
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -54,6 +55,7 @@ class  About extends Component{
                  </View>
             )
         }
+        console.log('sjsjs',this.state.sj)
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
               
@@ -68,7 +70,7 @@ class  About extends Component{
                 <Divider style={{width:'100%',height:15,backgroundColor:qj.themehui,marginTop:20}}/>
                <View style={{width:qj.w*.95,marginTop:20,}}>
                    {
-                    this.state.data.map((item,index)=>{
+                    this.state.sj.map((item,index)=>{
                 return(
                     <View style={{flexDirection:'row',
                     justifyContent:'space-between',

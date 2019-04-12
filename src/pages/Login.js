@@ -64,19 +64,34 @@ wj=()=>{
     if(this.state.wjzh==undefined||this.state.wjemail==undefined||this.state.wjphone==undefined){
         this.refs.toast.show('Please enter the complete information',1000)
     }else{
-        fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/user',{
-           method:'POST' 
-        })
-        .then(res=>res.json())
-        .then(res=>{
-            this.setState({visable:false,wjemail:undefined,wjphone:undefined,wjzh:undefined})
-            this.refs.toast.show('We will contact you within 1-3 working days',1000)
-           console.log('res--!',res)
-        }
+        // fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/user',{
+        //    method:'POST' 
+        // })
+        // .then(res=>res.json())
+        // .then(res=>{
+        //     this.setState({visable:false,wjemail:undefined,wjphone:undefined,wjzh:undefined})
+        //     this.refs.toast.show('We will contact you within 1-3 working days',1000)
+        //    console.log('res--!',res)
+        // }
     
-        ).catch(err=>{
-            console.log('err--',err)
-        })   
+        // ).catch(err=>{
+        //     console.log('err--',err)
+        // })   
+        let user=Parse.Object.extend('User')
+        let  data = new Parse.Query(user)
+         data.find().then(res=>{
+             console.log('res login---!',res)
+             this.setState({
+                 sj:res[0].attributes.data,
+                 visable:false,
+                 wjemail:undefined,
+                 wjphone:undefined,
+                 wjzh:undefined
+             })
+             this.refs.toast.show('We will contact you within 1-3 working days',1000)
+         }).catch(err=>{
+           console.log('err111',err)
+         })
     }
 }
     render(){
@@ -117,7 +132,7 @@ wj=()=>{
              </ScrollView>
 
  <Overlay overlayStyle={{height:qj.h*.45,alignItems:'center'}} 
- visible={this.state.visable}
+  isVisible={this.state.visable}
  onBackdropPress={()=>{
      this.setState({visable:false})
  }}>

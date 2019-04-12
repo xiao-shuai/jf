@@ -18,63 +18,18 @@ class ManageParameter extends Component {
             show:true,
             visible:false,
             in:0,
-            dizhi:I18n.t('dizhi')
+            dizhi:I18n.t('dizhi'),
         }
-        this.data=[
-            {
-              title:'Electric meter 01',
-              bianhao:'001',
-              xh:'CL48-AI',
-              dengji:'2.0',
-              dianya:'220',
-              dianliu:'40',
-              hz:'50',
-              date:'2019-1-4',
-              factory:'Mobile computer room'  
-            },
-            {
-                title:'Electric meter 02',
-                bianhao:'002',
-                xh:'CL48-AI',
-                dengji:'2.0',
-                dianya:'220',
-                dianliu:'40',
-                hz:'50',
-                date:'2019-1-18',
-                factory:'Mobile computer room'  
-              },
-              {
-                title:'Electric meter 03',
-                bianhao:'003',
-                xh:'CL48-AI',
-                dengji:'2.0',
-                dianya:'220',
-                dianliu:'40',
-                hz:'50',
-                date:'2019-4-9',
-                factory:''  
-              },
-              {
-                title:'Electric meter 04',
-                bianhao:'001',
-                xh:'CL48-AI',
-                dengji:'2.0',
-                dianya:'220',
-                dianliu:'40',
-                hz:'50',
-                date:'2019-2-9',
-                factory:''  
-              },
-        ]
+        
     }
    get=()=>{
-    let manage=Parse.Object.extend('manage')
-    let  data = new Parse.Query(manage)
+    let parameter=Parse.Object.extend('parameter')
+    let  data = new Parse.Query(parameter)
      data.find().then(res=>{
          console.log('res---!',res)
          this.setState({
              show:false,
-            //  top4:res[0].attributes.top4,
+             data:res[0].attributes.option,
          })
      }).catch(err=>{
 
@@ -85,6 +40,8 @@ class ManageParameter extends Component {
     this.get()
   }
     render(){
+        const lan=I18n.t('parameter')
+        const btm=I18n.t('btm')
         if(this.state.show){
             return(
                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -106,7 +63,7 @@ class ManageParameter extends Component {
      </View>
         <ScrollView style={{width:qj.w*.95}} showsVerticalScrollIndicator={false}>
         {
-            this.data.map((item,index)=>{
+            lan.map((item,index)=>{
          return(
            <View>
        <View style={styles.title}>
@@ -129,7 +86,7 @@ class ManageParameter extends Component {
         }
           {/* btm */}
        <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
-         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+         <Text style={{color:qj.themehui,}}>{btm}</Text>
        </View>
         </ScrollView>
         <Overlay visible={this.state.visible} onBackdropPress={()=>{

@@ -29,9 +29,6 @@ class ManageHarmonic extends Component {
             data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 10);
         }
         this.option = {
-            // title: {
-            //     text: '柱状图动画延迟'
-            // },
             legend: {
                 data: ['voltage', 'current'],
                 align: 'left'
@@ -143,13 +140,13 @@ class ManageHarmonic extends Component {
     }
    componentWillMount(){
 
-    let manage=Parse.Object.extend('manage')
-       let  data = new Parse.Query(manage)
+    let harmonic=Parse.Object.extend('harmonic')
+       let  data = new Parse.Query(harmonic)
         data.find().then(res=>{
             console.log('res---!',res)
             this.setState({
                 show:false,
-                data:res[0].attributes.shebei
+                data:res[0].attributes.option
             })
         }).catch(err=>{
 

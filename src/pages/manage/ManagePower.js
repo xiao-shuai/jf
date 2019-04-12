@@ -21,71 +21,23 @@ class ManagePower extends Component {
             dizhi:I18n.t('dizhi')
         }
 
-      this.option={
-// title: {
-//         text: 'Step Line'
-//     },
-    tooltip: {
-        trigger: 'axis'
-    },
-    legend: {
-        data:['A machine', 'B machine', 'C machine']
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    // toolbox: {
-    //     feature: {
-    //         saveAsImage: {}
-    //     }
-    // },
-    xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            name:'A machine',
-            type:'line',
-            step: 'start',
-            data:[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name:'B machine',
-            type:'line',
-            step: 'middle',
-            data:[220, 282, 201, 234, 290, 430, 410]
-        },
-        {
-            name:'C machine',
-            type:'line',
-            step: 'end',
-            data:[450, 432, 401, 454, 590, 530, 510]
-        }
-    ],
-    color:['#40E0D0','#00FA9A','#00BFFF']
-      }  
     }
 componentWillMount(){
-    let manage=Parse.Object.extend('manage')
-       let  data = new Parse.Query(manage)
+    let power=Parse.Object.extend('power')
+       let  data = new Parse.Query(power)
         data.find().then(res=>{
             console.log('res---!',res)
             this.setState({
                 show:false,
-                // top4:res[0].attributes.top4,
+                option:res[0].attributes.option,
             })
         }).catch(err=>{
 
         })
 }
     render(){
+        console.log('option22',this.state.option)
+        const btm=I18n.t('btm')
         if(this.state.show){
             return(
                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -93,6 +45,55 @@ componentWillMount(){
                </View>
             )
            }
+      const one=this.state.option
+      this.option={
+
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['A machine', 'B machine', 'C machine']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        // toolbox: {
+        //     feature: {
+        //         saveAsImage: {}
+        //     }
+        // },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name:'A machine',
+                type:'line',
+                step: 'start',
+                data:[one.one.one1, one.one.one2, one.one.one3, one.one.one4, one.one.one5, one.one.one6, one.one.one7]
+            },
+            {
+                name:'B machine',
+                type:'line',
+                step: 'middle',
+                data:[one.two.two1, one.two.two2, one.two.two3, one.two.two4, one.two.two5, one.two.two6, one.two.two7]
+            },
+            {
+                name:'C machine',
+                type:'line',
+                step: 'end',
+                data:[one.three.th1, one.three.th2, one.three.th3, one.three.th4, one.three.th5, one.three.th6, one.three.th7]
+            }
+        ],
+        color:['#40E0D0','#00FA9A','#00BFFF']
+          }  
         const options = {
             tableHead: ['Time', 'PF', 'PFa', 'PFb', 'PFc'],
             tableData: [
@@ -157,7 +158,7 @@ componentWillMount(){
 
           {/* btm */}
           <View style={{width:qj.w*.95,alignItems:'center',justifyContent:'center',marginTop:15}}>
-         <Text style={{color:qj.themehui,}}>-------- This is the bottom --------</Text>
+         <Text style={{color:qj.themehui,}}>{btm}</Text>
        </View>
              </ScrollView>
                    {/* tan kaung xz */}

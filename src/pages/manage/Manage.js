@@ -30,10 +30,10 @@ class  Manage extends Component{
             console.log('res---!',res)
             this.setState({
                 show:false,
-                // top4:res[0].attributes.top4,
+                top4:res[0].attributes.top4,
             })
         }).catch(err=>{
-
+            console.log('err--!',err)
         }) 
   }
   componentWillMount(){
@@ -47,8 +47,8 @@ class  Manage extends Component{
         data.find().then(res=>{
             console.log('res---!',res)
             this.setState({
-                show:false,
-                // top4:res[0].attributes.top4,
+                onRefresh:false,
+                top4:res[0].attributes.top4,
             })
         }).catch(err=>{
 
@@ -56,8 +56,7 @@ class  Manage extends Component{
   }
     
     render(){
-        const lan=I18n.t('manage')
-        const dizhi=I18n.t('dizhi')
+       
         if(this.state.show){
             return(
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -65,6 +64,8 @@ class  Manage extends Component{
                   </View>
             )
         }
+        const lan=I18n.t('manage')
+        const dizhi=I18n.t('dizhi')
         return(
             <SafeAreaView style={[qj.w*.95,{alignItems:'center',flex:1}]}>
               {/* title */}

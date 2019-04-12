@@ -12,6 +12,7 @@ export default {
         name:'中关村科技大厦',
         }
     ],
+    btm:'-------- 我是有底线的 --------',
     mine:{
 
         title:'能源互联网大数据平台',
@@ -36,6 +37,7 @@ export default {
         btm:'-------- 我是有底线的 --------',
         title:'远程控制',
         sm:'最值可勾选单一值，也可勾选双向值，不设置',
+        
         data:[
             {
               title:'设备001', 
@@ -76,10 +78,65 @@ export default {
                 }
         ],
     } ,
+    
+    analyze:{
+        title:'年平均用电量',
+        title2:'年度标准差的统计数据',
+
+    },
+    parameter:[
+        {
+            title:'电表 01',
+            bianhao:'001',
+            xh:'CL48-AI',
+            dengji:'2.0',
+            dianya:'220',
+            dianliu:'40',
+            hz:'50',
+            date:'2019-1-4',
+            factory:'移动电机房'  
+          },
+          {
+              title:'电表 02',
+              bianhao:'002',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-1-18',
+              factory:'移动电机房'  
+            },
+            {
+              title:'电表 03',
+              bianhao:'003',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-4-9',
+              factory:'移动电机房'  
+            },
+            {
+              title:'电表 04',
+              bianhao:'001',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-2-9',
+              factory:'移动电机房'  
+            },
+    ],
+
     manage:{
         btm:'-------- 我是有底线的 --------',
         title:'综合管理',
         nyxh:'能源消耗',
+        
+
         list:[
                 
             {
@@ -162,6 +219,8 @@ export default {
         btm:'-------- 我是有底线的 --------',
         tb_one_t:'能源',
         fuhe:'负荷',
-    }
+    },
+
+    
 
 }

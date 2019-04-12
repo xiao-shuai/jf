@@ -22,6 +22,37 @@ class ManageAnalyze extends Component {
             in:0,
             dizhi:I18n.t('dizhi')
         }
+         
+    }
+
+   get=()=>{
+    let analyze=Parse.Object.extend('analyze')
+       let  data = new Parse.Query(analyze)
+        data.find().then(res=>{
+            console.log('res---!',res)
+            this.setState({
+                show:false,
+                sj:res[0].attributes.option
+            })
+        }).catch(err=>{
+
+        })
+   } 
+componentWillMount(){
+  this.get()
+}
+
+    render(){
+        const lan=I18n.t('analyze')
+        const sj=this.state.sj
+        if(this.state.show){
+            return(
+                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
+                </View>
+            )
+        }
+        console.log('sj??',this.state.sj,'sj111',sj.sj1)
 
         this.option={
             title : {
@@ -53,7 +84,7 @@ class ManageAnalyze extends Component {
                 {   
                     name:'Standard values',
                     type:'bar',
-                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    data:[sj.sj1, sj.sj2, sj.sj3, sj.sj4, sj.sj5, sj.sj6, sj.sj7, sj.sj8, sj.sj9, sj.sj10,sj.sj11, sj.sj12],
                     markPoint : {
                         data : [
                             {type : 'max', name: 'The maximum'},
@@ -69,7 +100,8 @@ class ManageAnalyze extends Component {
                 {
                     name:'The actual value',
                     type:'bar',
-                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                    // data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                    data:[sj.sj13, sj.sj14, sj.sj15, sj.sj16, sj.sj17, sj.sj18, sj.sj19, sj.sj20, sj.sj21, sj.sj22, sj.sj23, sj.sj24],
                     markPoint : {
                         data : [
                             {name : 'In the highest', value : 182.2, xAxis: 7, yAxis: 183},
@@ -169,32 +201,6 @@ class ManageAnalyze extends Component {
             ],
             color:['#1E90FF','#20B2AA','#48D1CC','#AFEEEE','#40E0D0']
         };
-    }
-
-   get=()=>{
-    let manage=Parse.Object.extend('manage')
-       let  data = new Parse.Query(manage)
-        data.find().then(res=>{
-            console.log('res---!',res)
-            this.setState({
-                show:false,
-            })
-        }).catch(err=>{
-
-        })
-   } 
-componentWillMount(){
-  this.get()
-}
-
-    render(){
-        if(this.state.show){
-            return(
-                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
-                <ActivityIndicator  size={'large'} color={qj.themeColor}/>
-                </View>
-            )
-        }
         return(
             <SafeAreaView style={{flex:1}}>
          <View style={{width:'100%',alignItems:'center'}}>
@@ -210,14 +216,14 @@ componentWillMount(){
       <ScrollView style={{flex:1}}>
           {/* title */}
           <View style={{padding:qj.w*.025}}>
-              <Text style={{fontSize:18,fontWeight:'600'}}>Average annual electricity consumption per unit floor area</Text>
+              <Text style={{fontSize:18,fontWeight:'600'}}>{lan.title}</Text>
           </View>
           <View style={{marginTop:10}}>
           <Echarts height={300} option={this.option}/>
         </View>
         {/* title */}
         <View style={{width:'100%',alignItems:'center'}}>
-              <Text style={{fontSize:18,fontWeight:'600'}}>Annual standard deviation statistics</Text>
+              <Text style={{fontSize:18,fontWeight:'600'}}>{lan.title2}</Text>
         </View>
         <View style={{marginTop:10}}>
           <Echarts height={300} option={this.option2}/>
@@ -236,7 +242,7 @@ componentWillMount(){
                   {
                       this.state.dizhi.map((item,index)=>{
                        return (
-                           <TouchableOpacity onPress={()=>{
+                           <TouchableOpacity key={index} onPress={()=>{
                               this.setState({
                                   visible:false,
                                   in:index,

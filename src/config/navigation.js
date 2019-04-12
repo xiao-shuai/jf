@@ -33,9 +33,9 @@ const BottomTab=createBottomTabNavigator(
             if (routeName === 'home') {
                 iconName ='ios-home';
               } else if (routeName === 'manage') {
-                iconName = 'ios-bookmarks';
+                iconName = 'ios-options';
               }else if(routeName==='remote'){
-               iconName='ios-contacts'
+               iconName='ios-switch'
               }else{
                   iconName='ios-person'
               }

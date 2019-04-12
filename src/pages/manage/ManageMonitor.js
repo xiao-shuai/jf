@@ -22,18 +22,31 @@ class ManageMonitor extends Component {
         }
     }
 componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({show:false}) 
-    }
+    let monitor=Parse.Object.extend('monitor')
+    let  data = new Parse.Query(monitor)
+     data.find().then(res=>{
+         console.log('res---!',res)
+         this.setState({
+             show:false,
+             data:res[0].attributes.option
+         })
+     }).catch(err=>{
 
-    ).catch(err=>{
+     })
+    // fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    // .then(res=>res.json())
+    // .then(res=>{
+    //    this.setState({show:false}) 
+    // }
+
+    // ).catch(err=>{
         
-    }) 
+    // }) 
 }
 
     render(){
+        console.log('ssss',this.state.data)
+         
         if(this.state.show){
             return(
                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -41,6 +54,7 @@ componentWillMount(){
                </View>
             )
            }
+           const a=this.state.data
       const  option = {
             
             tooltip: {
@@ -65,7 +79,7 @@ componentWillMount(){
                 {
                     name:'Real-time voltage data',
                     type:'line',
-                    data:[148, 147, 146, 150, 151, 152],
+                    data:[a.a1, a.a2, a.a3, a.a4, a.a5, a.a6],
                     markPoint: {
                         data: [
                             {type: 'max', name: 'max'},

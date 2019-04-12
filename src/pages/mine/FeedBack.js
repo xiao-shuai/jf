@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Toast, {DURATION} from 'react-native-easy-toast'
+import Parse from 'parse/react-native'
 
 class  FeedBack extends Component{
 
@@ -24,37 +25,42 @@ class  FeedBack extends Component{
     }
 
  componentWillMount(){
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({isloading:false}) 
-    }
-
-    ).catch(err=>{
-        
-    })   
+    let feed=Parse.Object.extend('feed')
+    let  data = new Parse.Query(feed)
+    
+     data.find().then(res=>{
+         console.log('res---!',res)
+         this.setState({
+             isloading:false,
+             sj:res,
+             
+         })
+     }).catch(err=>{
+        console.log("err00",err)
+     })
  }
     sub=()=>{
         console.log('77',this.state.text)
        if(this.state.text==undefined){
         this.refs.toast.show('Please enter the content',1000)
        }else{
-           fetch('https://easy-mock.com/mock/5ca20f900aa7bf50eb36bcb0/baoxiu/order',{
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            
-           }).then(res=>res.json()).then(res=>{
-             this.refs.toast.show('Submitted successfully',1000)
-              this.setState({text:undefined})
-           }).catch(err=>{
-                console.log('err--!',err)
-           })
+       
+        let feed = Parse.Object.extend('feed')
+        let a=new feed()
+         a.set("content",[{"content":this.state.text}])
+         a.save().then(res=>{
+          console.log('okok',res)
+          this.refs.toast.show('Feedback success！',1000)
+         }
+
+         ).catch(err=>{
+            console.log('err--',err)
+         })
+       
        }
     }
     render(){
+       
         if(this.state.isloading){
             return(
                 <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
@@ -62,6 +68,7 @@ class  FeedBack extends Component{
                  </View>
             )
         }
+        // console.log('sjsj',this.state.sj.content)
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
          <ScrollView>

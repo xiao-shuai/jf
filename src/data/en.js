@@ -11,6 +11,7 @@ export default {
         name:'Jianwai technology building',
         }
     ],
+    btm:'-------- This is the bottom --------',
     mine:{
         title:'Energy Internet big data platform',
         log:'----- Logged account -----',
@@ -75,6 +76,56 @@ export default {
         ],
 
     },
+    analyze:{
+        title:'Average annual electricity consumption per unit floor area',
+        title2:'Annual standard deviation statistics'
+    },
+    parameter:[
+        {
+            title:'Electric meter 01',
+            bianhao:'001',
+            xh:'CL48-AI',
+            dengji:'2.0',
+            dianya:'220',
+            dianliu:'40',
+            hz:'50',
+            date:'2019-1-4',
+            factory:'Mobile computer room'  
+          },
+          {
+              title:'Electric meter 02',
+              bianhao:'002',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-1-18',
+              factory:'Mobile computer room'  
+            },
+            {
+              title:'Electric meter 03',
+              bianhao:'003',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-4-9',
+              factory:'Mobile computer room'  
+            },
+            {
+              title:'Electric meter 04',
+              bianhao:'001',
+              xh:'CL48-AI',
+              dengji:'2.0',
+              dianya:'220',
+              dianliu:'40',
+              hz:'50',
+              date:'2019-2-9',
+              factory:'Mobile computer room'  
+            },
+    ],
     manage:{
         btm:'-------- This is the bottom --------',
         title:'Management',

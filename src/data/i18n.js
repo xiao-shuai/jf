@@ -7,7 +7,7 @@ I18n.defaultLocale = 'zh'; //设置默认的语言
 
 I18n.fallback = true;        //设置
 
-I18n.locale = 'zh';           //设置当前的语言
+I18n.locale = 'en';           //设置当前的语言
 
 I18n.translations = {     //支持的语言列表
 en,

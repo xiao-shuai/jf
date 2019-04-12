@@ -47,15 +47,26 @@ class  Remote extends Component{
    
     onRefresh=()=>{
      this.setState({onRefresh:true})
-    fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
-    .then(res=>res.json())
-    .then(res=>{
-       this.setState({onRefresh:false}) 
-    }
+     let remote=Parse.Object.extend('remote')
+       let  data = new Parse.Query(remote)
+        data.find().then(res=>{
+            console.log('res remote---!',res)
+            this.setState({
+              onRefresh:false,
+            })
+        }).catch(err=>{
+         console.log('err-!',err)
+        }) 
+    // fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/hometab3')
+    // .then(res=>res.json())
+    // .then(res=>{
+    //    this.setState({onRefresh:false}) 
+    // }
 
-    ).catch(err=>{
+    // ).catch(err=>{
         
-    })   
+    // })   
+
     }
 get=()=>{
 

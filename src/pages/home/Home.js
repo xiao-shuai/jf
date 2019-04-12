@@ -11,7 +11,7 @@ import {View,
 } from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView ,NavigationActions} from 'react-navigation';
 import { Divider } from 'react-native-elements'
 import Echarts from 'native-echarts';
 import LinearGradient from 'react-native-linear-gradient';
@@ -39,6 +39,7 @@ class  Home extends Component{
        
     }
 componentWillMount(){
+    this.islogin()
   let home=Parse.Object.extend('home')
   let user = new Parse.Query(home)
     user.find().then(res=>{
@@ -57,14 +58,14 @@ componentWillMount(){
     ).catch(err=>{
         console.log('err--!',err)
     })
-    this.islogin()
+    
 }
 
 islogin=()=>{
  AsyncStorage.getItem('log').then(res=>{
     console.log('login--!',res)
     if(res==null){
-        this.props.navigation.navigate('Login')
+       this.props.navigation.reset([NavigationActions.navigate({ routeName: 'Login' })], 0)
     }
 
  }).catch(err=>{

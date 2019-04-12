@@ -20,85 +20,7 @@ class ManageZhilu extends Component {
             in:0,
             dizhi:I18n.t('dizhi')
         }
-        // this.six=[
-        //     {
-        //         title:'MAX',
-        //         num:'2345.66',
-        //         dw:'kwh',
-        //         zt:'Yesterday,'
-        //     },
-        //     {
-        //         title:'MIN',
-        //         num:'2345.66',
-        //         dw:'kwh',
-        //         zt:'Yesterday,'
-        //     },
-        //     {
-        //         title:'Average',
-        //         num:'2345.66',
-        //         dw:'kwh',
-        //         zt:'Yesterday'
-        //     },
-        //     {
-        //         title:'Divide',
-        //         num:'2345.66',
-        //         dw:'Dollar',
-        //         zt:'Yesterday,'
-        //     },
-        // ] 
-      
-        this.six2=[
-            {
-                title:'MAX',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'3%'
-            },
-            {
-                title:'MIN',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'9%'
-            },
-            {
-                title:'Average',
-                num:'2345.66',
-                dw:'kwh',
-                zt:'-8%'
-            },
-            {
-                title:'Divide',
-                num:'2345.66',
-                dw:'Dollar',
-                zt:'-10%'
-            },
-        ] 
-        this.six3=[
-            {
-                title:'The total energy',
-                num:'2345.66',
-                dw:'💲',
-                zt:'5%'
-            },
-            {
-                title:'Cost Electricity',
-                num:'2345.66',
-                dw:'💲',
-                zt:'9%'
-            },
-            {
-                title:'Cost water',
-                num:'2345.66',
-                dw:'💲',
-                zt:'-8%'
-            },
-            {
-                title:'Divide',
-                num:'2345.66',
-                dw:'💲',
-                zt:'-10%'
-            },
-        ] 
+
        this.option1={
         xAxis: {
             type: 'category',
@@ -664,7 +586,9 @@ this.biaoge=[
             this.setState({
                 show:false,
                 top:res[0].attributes.onetop,
-                twotop:res[0].attributes.twotop
+                twotop:res[0].attributes.twotop,
+                threetop:res[0].attributes.threetop,
+
             })
         }).catch(err=>{
 
@@ -683,6 +607,7 @@ componentWillMount(){
                </View>
             )
            }
+
         return(
             <SafeAreaView style={{flex:1}}>
              <View style={{width:'100%',alignItems:'center'}}>
@@ -772,7 +697,7 @@ componentWillMount(){
                     </View>
       <View style={{flexDirection:'row',justifyContent:'space-between',flexWrap:'wrap'}}>
            {
-               this.six3.map((item,index)=>{
+                this.state.threetop.map((item,index)=>{
             return(
             <View style={{width:"49%",height:qj.h*.1,backgroundColor:qj.themehui,marginTop:10,alignItems:'center',justifyContent:'center'}}>
               

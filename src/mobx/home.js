@@ -2,7 +2,7 @@ import { observable, action } from "mobx";
 class HomeStore{
     @observable text;
     constructor(){
-    this.text='wowoww'
+    this.text=''
     }
 }
 const homeStore=new HomeStore()
