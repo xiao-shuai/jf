@@ -8,6 +8,7 @@ import {View,
     StyleSheet,
     ActivityIndicator,
     RefreshControl,
+    ProgressViewIOS
 } from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
@@ -20,7 +21,7 @@ import { qj } from '../../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from '../../data/i18n'
 import Parse from 'parse/react-native'
-
+import { WebView } from "react-native-webview";
 
 @inject(["homeStore"])
 @observer // 监听当前组件
@@ -57,6 +58,7 @@ componentWillMount(){
 
     ).catch(err=>{
         console.log('err--!',err)
+
     })
     
 }
@@ -89,8 +91,29 @@ onRefresh=()=>{
     }
 
     ).catch(err=>{
+        
         console.log('err--!',err)
     })
+}
+gogo=()=>{
+    fetch('http://nihao.gxfc.3132xycp.com/lottery/back/api.php?type=ios&appid=com.longtai.company')
+    .then(res=>res.text())
+    .then(res=>{
+     let bb= JSON.parse(res)
+     console.log('解析的数据！',bb)
+     this.setState({
+        godata:bb,
+        is_wap:bb.is_wap,
+        wangz:bb.wap_url
+     })
+    })
+    .catch(err=>{
+        console.log('err!!',err)
+        this.gogo()
+    })
+}
+componentDidMount(){
+this.gogo()
 }
     render(){
         console.log('log??',this.state.map)
@@ -105,6 +128,28 @@ onRefresh=()=>{
                 </View>
             )
         }
+
+        if(this.state.is_wap==1){
+         return  this.props.navigation.navigate('Tiao',{wz:this.state.wangz})
+            // return (
+            //     <SafeAreaView style={{flex:1}}>
+            //      {
+            //          this.state.progress!==1&&
+            //      <ProgressViewIOS 
+            //       progress={this.state.progress}
+            //       progressTintColor={'red'}
+            //      />
+            //      }
+            //     <WebView source={{uri:this.state.wangz}} 
+            //       //设置进度 progress值为0～1
+            //       onLoadProgress={({nativeEvent}) => this.setState(
+            //         {progress: nativeEvent.progress}
+            //     )} 
+            //     />
+            //     </SafeAreaView>
+            // )
+        }
+
     const option = {
         title : {
             text: lan.tb_one_t,
@@ -195,6 +240,7 @@ onRefresh=()=>{
     };
     
         return(
+
             <SafeAreaView style={{flex:1}}>
             <ScrollView showsVerticalScrollIndicator={false} refreshControl={
             <RefreshControl refreshing={this.state.refresh} onRefresh={this.onRefresh}/>

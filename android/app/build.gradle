@@ -107,6 +107,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "2f250acd94d9d93946528c30",
+                APP_CHANNEL : "default"
+        ]
+
     }
     splits {
         abi {
@@ -138,6 +143,9 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-webview')
+    implementation project(':jcore-react-native')
+    implementation project(':jpush-react-native')
     implementation project(':react-native-clear-app-cache')
     implementation project(':react-native-i18n')
     implementation project(':react-native-maps')

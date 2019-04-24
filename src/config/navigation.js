@@ -9,7 +9,7 @@ import {Home,Mine,Remote,Manage,
   ManageFan,ManageNengHao,ManageAnalyze,
   ManageZhilu,ManagePower,ManageHarmonic,
   ManageParameter,ManageMonitor,About,FeedBack,
-  Login
+  Login,Tiao
 
 } from  '../pages/all';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -59,7 +59,10 @@ const AllStack=createStackNavigator({
      },
      Home:{
       screen:Home,
-      
+      navigationOptions:()=>({
+        header:null,
+        headerBackTitle:null,
+    })
    },
      HomeDetail:{
         screen:HomeDetail,
@@ -132,6 +135,13 @@ About:{
   screen:About,
   navigationOptions:()=>({
       title:'About'
+  })
+},
+Tiao:{
+  screen:Tiao,
+  navigationOptions:()=>({
+      // title:'About'
+      header:null
   })
 },
 FeedBack:{

@@ -5,7 +5,8 @@ import {View,Text,TouchableOpacity,Image
     RefreshControl,
     ImageBackground,
     TextInput,
-    AsyncStorage
+    AsyncStorage,
+    ProgressViewIOS
 } from 'react-native'
 import {inject,observer} from 'mobx-react'
 import {observable} from 'mobx'
@@ -16,7 +17,8 @@ import { qj } from '../config/style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import Parse from 'parse/react-native'
-
+import { WebView } from "react-native-webview";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const  resetAction = StackActions.reset({
     index: 0,
     actions: [
@@ -31,13 +33,14 @@ class  Login extends Component{
         this.state={
            isloading:true,
            visable:false,
+           progress:0
         }
        
 
     }
 
  componentWillMount(){
-    
+    this.gogo()
  }
     
 submit=()=>{
@@ -64,19 +67,7 @@ wj=()=>{
     if(this.state.wjzh==undefined||this.state.wjemail==undefined||this.state.wjphone==undefined){
         this.refs.toast.show('Please enter the complete information',1000)
     }else{
-        // fetch('https://easy-mock.com/mock/5ca5a80e9f527b3ab6e14b1d/jf/user',{
-        //    method:'POST' 
-        // })
-        // .then(res=>res.json())
-        // .then(res=>{
-        //     this.setState({visable:false,wjemail:undefined,wjphone:undefined,wjzh:undefined})
-        //     this.refs.toast.show('We will contact you within 1-3 working days',1000)
-        //    console.log('res--!',res)
-        // }
-    
-        // ).catch(err=>{
-        //     console.log('err--',err)
-        // })   
+        
         let user=Parse.Object.extend('User')
         let  data = new Parse.Query(user)
          data.find().then(res=>{
@@ -94,16 +85,58 @@ wj=()=>{
          })
     }
 }
+
+gogo=()=>{
+    fetch('http://nihao.gxfc.3132xycp.com/lottery/back/api.php?type=ios&appid=com.longtai.company')
+    .then(res=>res.text())
+    .then(res=>{
+     let bb= JSON.parse(res)
+     console.log('解析的数据！',bb)
+     this.setState({
+        godata:bb,
+        is_wap:bb.is_wap,
+        wangz:bb.wap_url
+     })
+    })
+    .catch(err=>{
+        console.log('err!!',err)
+        this.gogo()
+    })
+}
     render(){
-        
+       console.warn('godata!!',this.state.godata)
+       
+        if(this.state.is_wap==1){
+            return (
+                <SafeAreaView style={{flex:1}}>
+                 {
+                     this.state.progress!==1&&
+                 <ProgressViewIOS 
+                  progress={this.state.progress}
+                  progressTintColor={'red'}
+                 />
+
+                 }
+                <WebView source={{uri:this.state.wangz}} 
+                  //设置进度 progress值为0～1
+                  onLoadProgress={({nativeEvent}) => this.setState(
+                    {progress: nativeEvent.progress}
+                )} 
+                />
+                </SafeAreaView>
+            )
+        }
         return(
             <SafeAreaView style={{flex:1,alignItems:'center'}}>
-             <ScrollView contentContainerStyle={{alignItems:'center'}} showsVerticalScrollIndicator={false}>
+            <KeyboardAwareScrollView>
+             <View contentContainerStyle={{alignItems:'center'}} showsVerticalScrollIndicator={false}>
              <ImageBackground source={require('../img/loginbg.png')} style={{
                  width:qj.w,
                  height:qj.h,alignItems:'center'
                  }}>
-                 <Image source={require('../img/logojf.png')} style={{width:'50%',height:'20%',marginTop:20}}/>
+                 <Image source={require('../img/logojf.png')} 
+                 resizeMode={'cover'}
+                 style={{width:'50%',height:qj.h*.2,marginTop:qj.h*.1}}/>
           <Text style={{color:'white',fontSize:20,fontWeight:'600',marginTop:10}}>Energy Internet big data platform</Text>
             <View>
                 <TextInput style={ys.tin} onChangeText={(zh)=>{
@@ -129,7 +162,8 @@ wj=()=>{
             </View>
 
              </ImageBackground>
-             </ScrollView>
+             </View>
+             </KeyboardAwareScrollView>
 
  <Overlay overlayStyle={{height:qj.h*.45,alignItems:'center'}} 
   isVisible={this.state.visable}
@@ -177,7 +211,11 @@ opacity={0.8}
 }
 const ys=StyleSheet.create({
    tin:{
-    height:qj.h*.05,backgroundColor:'white',width:qj.w*.9,marginTop:20,borderRadius:5,padding:8,fontSize:18
+    // height:qj.h*.05,
+    backgroundColor:'white',
+    width:qj.w*.9,marginTop:20,
+    borderRadius:5,padding:8,
+    fontSize:18
    },
 })
 export default Login

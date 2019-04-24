@@ -1,4 +1,12 @@
 rootProject.name = 'jf'
+include ':react-native-webview'
+project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
+include ':jcore-react-native'
+project(':jcore-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/jcore-react-native/android')
+
+include ':jpush-react-native'
+project(':jpush-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/jpush-react-native/android')
+
 include ':react-native-clear-app-cache'
 project(':react-native-clear-app-cache').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-clear-app-cache/android')
 include ':react-native-i18n'

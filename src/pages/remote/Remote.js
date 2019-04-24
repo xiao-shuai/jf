@@ -121,7 +121,9 @@ get=()=>{
       const lan=I18n.t('remote')
         if(this.state.isloading){
             return(
-                <View style={{width:qj.w,height:qj.h*.8,alignItems:'center',justifyContent:'center'}}>
+                <View style={{width:qj.w,
+                height:qj.h*.8,
+                alignItems:'center',justifyContent:'center'}}>
                 <ActivityIndicator  size={'large'} color={qj.themeColor}/>
                  </View>
             )
@@ -130,7 +132,8 @@ get=()=>{
             <SafeAreaView style={{flex:1}}>
  {/* title */}
  <View style={{width:qj.w,}}>
-              <Text style={{fontSize:20,fontWeight:'500',textAlign:'center'}}>{lan.title}</Text>
+              <Text style={{fontSize:20,
+                fontWeight:'500',textAlign:'center'}}>{lan.title}</Text>
               <Divider style={{backgroundColor:qj.themehui,height:5,marginTop:5}}/>
   </View>
 
@@ -273,13 +276,31 @@ alignItems:'center'
        {/* reset tk */}
    <Overlay visible={this.state.visible2} onBackdropPress={()=>{
      this.setState({visible2:false})
-   }} overlayStyle={{width:qj.w*.8,height:qj.h*.16}}>
-        <View style={{height:qj.h*.05,padding:10,borderRadius:3,borderWidth:1,borderColor:qj.themeColor,marginTop:10}}>
-          <TextInput style={{fontSize:18,lineHeight:qj.h*.05}} onChangeText={(resetnum)=>{
+   }} overlayStyle={{
+    
+    width:qj.w*.8,
+    height:qj.h*.2,
+    padding:20,
+    shadowColor:qj.themeColor,
+    shadowOpacity:.8,
+     }}>
+        <View style={{
+          height:qj.h*.06,
+        // padding:10,
+        borderRadius:3,borderWidth:1,
+          borderColor:qj.themeColor,
+          // marginTop:10
+          }}>
+          <TextInput style={{
+                height:qj.h*.05,
+                padding:8
+          }} onChangeText={(resetnum)=>{
                this.setState({resetnum})
-          }}/>
+          }} keyboardType={'numeric'}/>
         </View>
-        <View style={{justifyContent:'space-between',flexDirection:'row',marginTop:qj.h*.03}}>
+        <View style={{
+          justifyContent:'space-between',
+        flexDirection:'row',marginTop:qj.h*.03}}>
           <TouchableOpacity  onPress={()=>{
             this.setState({visible2:false})
           }} >
@@ -303,13 +324,35 @@ alignItems:'center'
    {/* tk222 */}
    <Overlay visible={this.state.visible3} onBackdropPress={()=>{
      this.setState({visible3:false})
-   }} overlayStyle={{width:qj.w*.8,height:qj.h*.16}}>
-        <View style={{height:qj.h*.05,padding:10,borderRadius:3,borderWidth:1,borderColor:qj.themeColor,marginTop:10}}>
-          <TextInput style={{fontSize:18,lineHeight:qj.h*.05}} onChangeText={(resetnum2)=>{
+   }} overlayStyle={{
+     width:qj.w*.8,
+   height:qj.h*.2,
+   padding:20,
+   shadowColor:qj.themeColor,
+   shadowOpacity:.8,
+   
+   }}>
+        <View style={{height:qj.h*.06,
+          borderRadius:3,borderWidth:1,
+          borderColor:qj.themeColor,
+          // marginTop:10
+          }}>
+          <TextInput style={{
+            // fontSize:18,
+            height:qj.h*.05,
+          // lineHeight:qj.h*.05
+            padding:8
+        }} 
+           keyboardType={'numeric'}
+          onChangeText={(resetnum2)=>{
                this.setState({resetnum2})
           }}/>
         </View>
-        <View style={{justifyContent:'space-between',flexDirection:'row',marginTop:qj.h*.03}}>
+        <View style={{justifyContent:'space-between',
+        flexDirection:'row',
+        marginTop:qj.h*.03,
+        // backgroundColor:'red',
+        }}>
           <TouchableOpacity  onPress={()=>{
             this.setState({visible3:false})
           }} >
@@ -395,7 +438,7 @@ const ys=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         backgroundColor:qj.themehui,
-        height:qj.h*.05,
+        // height:qj.h*.05,
         alignItems:'center',
         padding:8,
         borderRadius:8,

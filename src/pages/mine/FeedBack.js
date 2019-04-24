@@ -80,7 +80,7 @@ class  FeedBack extends Component{
             <TouchableOpacity style={ys.sub} onPress={()=>{
                  this.sub()
             }}>
-              <Text style={{fontSize:25,color:'white'}}>submit</Text>
+              <Text style={{fontSize:18,color:'white'}}>submit</Text>
             </TouchableOpacity>
          </ScrollView>
  <Toast
@@ -102,7 +102,10 @@ const ys=StyleSheet.create({
         width:qj.w*.95,marginTop:20,backgroundColor:qj.themehui,height:qj.h*.26,padding:10,borderRadius:5
     },
      sub:{
-        width:'100%',height:qj.h*.05,backgroundColor:qj.themeColor,marginTop:20,borderRadius:5,alignItems:'center',justifyContent:'center'
+        width:'100%',backgroundColor:qj.themeColor,
+        marginTop:20,borderRadius:5,
+        alignItems:'center',justifyContent:'center',
+        padding:6
      },
 })
 export default FeedBack

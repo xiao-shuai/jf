@@ -133,7 +133,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         backgroundColor:qj.themehui,
-        height:qj.h*.05,
+        // height:qj.h*.05,
         alignItems:'center',
         padding:8,
         borderRadius:8,

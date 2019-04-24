@@ -3,6 +3,7 @@ package com.jf;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.learnta.clear.ClearCachePackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNCWebViewPackage(),
             new ClearCachePackage(),
             new RNI18nPackage(),
             new MapsPackage(),

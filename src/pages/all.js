@@ -16,6 +16,7 @@ import ManageMonitor from '../pages/manage/ManageMonitor'
 import About from  '../pages/mine/About'
 import FeedBack from  './mine/FeedBack'
 import Login from './Login'
+import Tiao from './Tiao'
 export {
     Home,
     Manage,
@@ -34,5 +35,6 @@ export {
     ManageMonitor,
     About,
     FeedBack,
-    Login
+    Login,
+    Tiao
 }
